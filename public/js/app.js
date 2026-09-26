@@ -94,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Initialize Modules
-  initDualLayerCursor();
   initJumpingHero();
   initServicesAnimations();
   initSmoothHorizontalTrack();
@@ -104,109 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initKineticContact();
   initPremiumMotion();
 });
-
-/* -------------------------------------------------------------
- * 1. Dual-Layer Adaptive Kinetic Cursor (Optimized Zero-Reflow)
- * ----------------------------------------------------------- */
-function initDualLayerCursor() {
-  const dot = document.getElementById('cursor-dot');
-  const ring = document.getElementById('cursor-ring');
-  const badge = document.getElementById('cursor-badge');
-
-  if (!dot || !ring) return;
-
-  let mouseX = -200;
-  let mouseY = -200;
-  let ringX = -200;
-  let ringY = -200;
-  let dotX = -200;
-  let dotY = -200;
-  let hasMoved = false;
-
-  window.addEventListener('mousemove', (e) => {
-    if (!hasMoved) {
-      hasMoved = true;
-      dot.style.opacity = '1';
-      ring.style.opacity = '1';
-    }
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  }, { passive: true });
-
-  const theaterWrapper = document.getElementById('theater-wrapper');
-  let isDarkTheme = false;
-
-  // Smooth RAF loop for dual-speed spring follower (No layout thrashing)
-  function updateCursor() {
-    // Dot follows with immediate responsiveness
-    dotX += (mouseX - dotX) * 0.65;
-    dotY += (mouseY - dotY) * 0.65;
-    dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
-
-    // Ring follows with fluid elastic momentum
-    ringX += (mouseX - ringX) * 0.2;
-    ringY += (mouseY - ringY) * 0.2;
-    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-
-    // Fast bounds check without expensive elementFromPoint DOM traversal
-    if (theaterWrapper) {
-      const rect = theaterWrapper.getBoundingClientRect();
-      const shouldBeDark = (mouseY >= rect.top && mouseY <= rect.bottom);
-      if (shouldBeDark !== isDarkTheme) {
-        isDarkTheme = shouldBeDark;
-        if (isDarkTheme) {
-          document.body.classList.add('cursor-theme-dark');
-        } else {
-          document.body.classList.remove('cursor-theme-dark');
-        }
-      }
-    }
-
-    requestAnimationFrame(updateCursor);
-  }
-  requestAnimationFrame(updateCursor);
-
-  // Mouse click bounce response
-  window.addEventListener('mousedown', () => {
-    ring.classList.add('is-click');
-    dot.style.transform += ' scale(0.6)';
-  });
-  window.addEventListener('mouseup', () => {
-    ring.classList.remove('is-click');
-  });
-
-  // Contextual Hover States
-  const cursorTargets = document.querySelectorAll('[data-cursor]');
-  cursorTargets.forEach((el) => {
-    const type = el.getAttribute('data-cursor');
-
-    el.addEventListener('mouseenter', () => {
-      if (type === 'view') {
-        ring.classList.add('is-view');
-        badge.textContent = 'VIEW ↗';
-      } else if (type === 'drag') {
-        ring.classList.add('is-view');
-        badge.textContent = 'SCROLL ↔';
-      } else if (type === 'link' || type === 'pill') {
-        ring.classList.add('is-hover');
-      } else if (type === 'jump') {
-        ring.classList.add('is-hover');
-      }
-    });
-
-    el.addEventListener('mouseleave', () => {
-      ring.classList.remove('is-hover', 'is-view');
-      badge.textContent = '';
-    });
-  });
-
-  // Fallback for standard links and buttons
-  const standardLinks = document.querySelectorAll('a:not([data-cursor]), button:not([data-cursor])');
-  standardLinks.forEach((el) => {
-    el.addEventListener('mouseenter', () => ring.classList.add('is-hover'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('is-hover'));
-  });
-}
 
 /* -------------------------------------------------------------
  * 2. Hero Section: Word Jumping & Rubberband Pill
