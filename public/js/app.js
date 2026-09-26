@@ -1,0 +1,864 @@
+// ==========================================================================
+// WEBNEST - KINETIC ANIMATION ORCHESTRATION (SMOOTH & JUMP ENGINE)
+// ==========================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Initialize Lenis (Butter-Smooth, Snappy & Lightweight Physics)
+  let lenis;
+  try {
+    lenis = new Lenis({
+      lerp: 0.12,              // Snappy, responsive, zero sluggish dragging
+      wheelMultiplier: 1.0,    // Natural 1:1 scroll velocity
+      touchMultiplier: 1.0,    // 1:1 mobile touch physics
+      smoothWheel: true,
+      syncTouch: false,        // Let touch devices use hardware-accelerated 120Hz native scrolling
+      infinite: false
+    });
+
+    window.lenisInstance = lenis;
+
+    // Sync Lenis scroll updates with GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+
+    // Keep Lenis ticking on GSAP's high-precision ticker
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    // Gracefully interpolate dropped frames instead of stuttering
+    gsap.ticker.lagSmoothing(500, 33);
+  } catch (err) {
+    console.warn('Lenis initialization warning:', err);
+  }
+
+  // Register GSAP plugins
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+  }
+
+  // Smooth anchor link click handling via Lenis
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const targetId = anchor.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          if (lenis) {
+            lenis.scrollTo(target, { offset: -90, duration: 0.9 });
+          } else {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+    });
+  });
+
+  // Dynamic Navbar Scroll & Theme Controller (Throttled with requestAnimationFrame)
+  const nav = document.querySelector('.top-nav');
+  const theater = document.getElementById('theater-wrapper');
+  let tickingNav = false;
+  function updateNavTheme() {
+    if (!nav) return;
+    const scrollY = window.scrollY;
+    if (scrollY > 30) {
+      nav.classList.add('is-scrolled');
+    } else {
+      nav.classList.remove('is-scrolled');
+    }
+
+    if (theater) {
+      const theaterRect = theater.getBoundingClientRect();
+      if (theaterRect.top <= 75 && theaterRect.bottom >= 75) {
+        nav.classList.add('nav-dark');
+      } else {
+        nav.classList.remove('nav-dark');
+      }
+    }
+    tickingNav = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!tickingNav) {
+      tickingNav = true;
+      requestAnimationFrame(updateNavTheme);
+    }
+  }, { passive: true });
+  updateNavTheme();
+
+  // Re-calculate triggers on complete page asset load
+  window.addEventListener('load', () => {
+    updateNavTheme();
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
+    }
+  });
+
+  // Initialize Modules
+  initDualLayerCursor();
+  initJumpingHero();
+  initServicesAnimations();
+  initSmoothHorizontalTrack();
+  initElasticContextInterlude();
+  initJumpingStatsAndQuotes();
+  initNewSectionsAnimations();
+  initKineticContact();
+  initPremiumMotion();
+});
+
+/* -------------------------------------------------------------
+ * 1. Dual-Layer Adaptive Kinetic Cursor (Optimized Zero-Reflow)
+ * ----------------------------------------------------------- */
+function initDualLayerCursor() {
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  const badge = document.getElementById('cursor-badge');
+
+  if (!dot || !ring) return;
+
+  let mouseX = -200;
+  let mouseY = -200;
+  let ringX = -200;
+  let ringY = -200;
+  let dotX = -200;
+  let dotY = -200;
+  let hasMoved = false;
+
+  window.addEventListener('mousemove', (e) => {
+    if (!hasMoved) {
+      hasMoved = true;
+      dot.style.opacity = '1';
+      ring.style.opacity = '1';
+    }
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  }, { passive: true });
+
+  const theaterWrapper = document.getElementById('theater-wrapper');
+  let isDarkTheme = false;
+
+  // Smooth RAF loop for dual-speed spring follower (No layout thrashing)
+  function updateCursor() {
+    // Dot follows with immediate responsiveness
+    dotX += (mouseX - dotX) * 0.65;
+    dotY += (mouseY - dotY) * 0.65;
+    dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+
+    // Ring follows with fluid elastic momentum
+    ringX += (mouseX - ringX) * 0.2;
+    ringY += (mouseY - ringY) * 0.2;
+    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+
+    // Fast bounds check without expensive elementFromPoint DOM traversal
+    if (theaterWrapper) {
+      const rect = theaterWrapper.getBoundingClientRect();
+      const shouldBeDark = (mouseY >= rect.top && mouseY <= rect.bottom);
+      if (shouldBeDark !== isDarkTheme) {
+        isDarkTheme = shouldBeDark;
+        if (isDarkTheme) {
+          document.body.classList.add('cursor-theme-dark');
+        } else {
+          document.body.classList.remove('cursor-theme-dark');
+        }
+      }
+    }
+
+    requestAnimationFrame(updateCursor);
+  }
+  requestAnimationFrame(updateCursor);
+
+  // Mouse click bounce response
+  window.addEventListener('mousedown', () => {
+    ring.classList.add('is-click');
+    dot.style.transform += ' scale(0.6)';
+  });
+  window.addEventListener('mouseup', () => {
+    ring.classList.remove('is-click');
+  });
+
+  // Contextual Hover States
+  const cursorTargets = document.querySelectorAll('[data-cursor]');
+  cursorTargets.forEach((el) => {
+    const type = el.getAttribute('data-cursor');
+
+    el.addEventListener('mouseenter', () => {
+      if (type === 'view') {
+        ring.classList.add('is-view');
+        badge.textContent = 'VIEW ↗';
+      } else if (type === 'drag') {
+        ring.classList.add('is-view');
+        badge.textContent = 'SCROLL ↔';
+      } else if (type === 'link' || type === 'pill') {
+        ring.classList.add('is-hover');
+      } else if (type === 'jump') {
+        ring.classList.add('is-hover');
+      }
+    });
+
+    el.addEventListener('mouseleave', () => {
+      ring.classList.remove('is-hover', 'is-view');
+      badge.textContent = '';
+    });
+  });
+
+  // Fallback for standard links and buttons
+  const standardLinks = document.querySelectorAll('a:not([data-cursor]), button:not([data-cursor])');
+  standardLinks.forEach((el) => {
+    el.addEventListener('mouseenter', () => ring.classList.add('is-hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('is-hover'));
+  });
+}
+
+/* -------------------------------------------------------------
+ * 2. Hero Section: Word Jumping & Rubberband Pill
+ * ----------------------------------------------------------- */
+function initJumpingHero() {
+  const pill = document.getElementById('hero-pill');
+
+  // Staggered Rubberband Jump on Page Load
+  gsap.from('.jump-word', {
+    y: 40,
+    scale: 0.95,
+    opacity: 0,
+    duration: 1.1,
+    stagger: 0.08,
+    ease: 'back.out(2)',
+    delay: 0.15
+  });
+
+  gsap.from('.jump-item', {
+    y: 30,
+    opacity: 0,
+    duration: 0.9,
+    stagger: 0.1,
+    ease: 'power2.out',
+    delay: 0.45
+  });
+
+  // Dynamic Pill Interactive Spring & Jump
+  if (pill) {
+    pill.addEventListener('mouseenter', () => {
+      gsap.to(pill, {
+        y: -6,
+        scale: 1.05,
+        duration: 0.3,
+        ease: 'back.out(3)'
+      });
+    });
+
+    pill.addEventListener('mouseleave', () => {
+      gsap.to(pill, {
+        y: 0,
+        scale: 1,
+        duration: 0.35,
+        ease: 'power2.out'
+      });
+    });
+
+    pill.addEventListener('click', () => {
+      // Playful rubberband jump before scrolling down
+      gsap.timeline()
+        .to(pill, { scaleX: 1.15, scaleY: 0.85, duration: 0.1 })
+        .to(pill, { scaleX: 0.9, scaleY: 1.15, y: -12, duration: 0.22, ease: 'back.out(3)' })
+        .to(pill, { scale: 1, y: 0, duration: 0.28, ease: 'elastic.out(1.2, 0.4)' });
+
+      setTimeout(() => {
+        const targetSection = document.getElementById('projects') || document.getElementById('services');
+        if (targetSection) {
+          if (window.lenisInstance) {
+            window.lenisInstance.scrollTo(targetSection, { offset: -60, duration: 1.2 });
+          } else {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }, 250);
+    });
+  }
+}
+
+/* -------------------------------------------------------------
+ * 2.5 Services Grid Entrance Animation
+ * ----------------------------------------------------------- */
+function initServicesAnimations() {
+  gsap.fromTo('.service-box-card',
+    { opacity: 0, y: 35 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#services',
+        start: 'top 85%',
+        once: true
+      }
+    }
+  );
+}
+
+/* -------------------------------------------------------------
+ * 3. Smooth Anti-Jitter Horizontal Track & Parallax
+ * ----------------------------------------------------------- */
+function initSmoothHorizontalTrack() {
+  const track = document.getElementById('horizontal-track');
+  const stage = document.getElementById('projects') || document.getElementById('horizontal-stage');
+  const hudFill = document.getElementById('hud-fill');
+  const slideNum = document.getElementById('slide-num');
+
+  if (!track || !stage) return;
+
+  // Mobile / tablet: allow natural horizontal scroll without locking viewport
+  if (window.innerWidth <= 900) {
+    track.style.overflowX = 'auto';
+    track.style.scrollSnapType = 'x mandatory';
+    return;
+  }
+
+  function getScrollDistance() {
+    return -(track.scrollWidth - window.innerWidth + 80);
+  }
+
+  // Instant responsive scrub (0.25s) with clean pin
+  gsap.to(track, {
+    x: getScrollDistance,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: stage,
+      start: 'top top',
+      end: () => `+=${track.scrollWidth - window.innerWidth}`,
+      pin: true,
+      anticipatePin: 1,
+      scrub: 0.25,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        const progress = Math.min(1, Math.max(0, self.progress));
+        if (hudFill) {
+          hudFill.style.width = `${Math.max(15, progress * 100)}%`;
+        }
+        if (slideNum) {
+          const current = Math.min(4, Math.floor(progress * 4) + 1);
+          slideNum.textContent = `0${current} / 04`;
+        }
+      }
+    }
+  });
+
+  // Lightweight 3D tilt with RAF throttling and overwrite auto
+  const projectCards = document.querySelectorAll('.project-image-frame');
+  projectCards.forEach((card) => {
+    let ticking = false;
+    card.addEventListener('mousemove', (e) => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        gsap.to(card, {
+          rotateY: x * 0.03,
+          rotateX: -y * 0.03,
+          y: -8,
+          scale: 1.02,
+          duration: 0.3,
+          ease: 'power2.out',
+          overwrite: 'auto',
+          transformPerspective: 900
+        });
+        ticking = false;
+      });
+    }, { passive: true });
+
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, {
+        rotateY: 0,
+        rotateX: 0,
+        y: 0,
+        scale: 1,
+        duration: 0.35,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+    });
+  });
+}
+
+/* -------------------------------------------------------------
+ * 4. "Real Context." Elastic Jump Reveal (Frame 10)
+ * ----------------------------------------------------------- */
+function initElasticContextInterlude() {
+  const section = document.getElementById('context');
+  if (!section) return;
+
+  const realWord = document.querySelector('.context-real');
+  const boldWord = document.querySelector('.context-bold');
+
+  gsap.fromTo([realWord, boldWord],
+    { scale: 0.75, y: 80, opacity: 0 },
+    {
+      scale: 1,
+      y: 0,
+      opacity: 1,
+      duration: 1.2,
+      stagger: 0.18,
+      ease: 'back.out(2)',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%',
+        once: true
+      }
+    }
+  );
+}
+
+/* -------------------------------------------------------------
+ * 5. Jumping Stats & Quote Animators
+ * ----------------------------------------------------------- */
+function initJumpingStatsAndQuotes() {
+  // Dark metrics row entrance jump
+  gsap.fromTo('.dark-metric-row',
+    { y: 60, scale: 0.9, opacity: 0 },
+    {
+      y: 0,
+      scale: 1,
+      opacity: 1,
+      duration: 0.9,
+      stagger: 0.12,
+      ease: 'back.out(1.8)',
+      scrollTrigger: {
+        trigger: '#dark-metrics',
+        start: 'top 80%',
+        once: true
+      }
+    }
+  );
+
+  // Mission quote statement entrance
+  gsap.fromTo('.quote-statement',
+    { scale: 0.94, y: 40, opacity: 0 },
+    {
+      scale: 1,
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.mission-quote-section',
+        start: 'top 80%',
+        once: true
+      }
+    }
+  );
+}
+
+/* -------------------------------------------------------------
+ * 6. Kinetic Grand CONTACT Jump & Ghost Spring
+ * ----------------------------------------------------------- */
+function initKineticContact() {
+  const contactSection = document.getElementById('contact');
+  if (!contactSection) return;
+
+  const mainText = document.querySelector('.contact-main-text');
+  const ghost1 = document.querySelector('.ghost-layer-1');
+  const ghost2 = document.querySelector('.ghost-layer-2');
+
+  // Jumping entrance without pushing text down into bento grid
+  if (mainText) {
+    gsap.fromTo(mainText,
+      { y: 35, scale: 0.92, opacity: 0 },
+      {
+        y: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 0.9,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: contactSection,
+          start: 'top 80%',
+          once: true
+        }
+      }
+    );
+  }
+
+  // Interactive 3D mouse parallax on CONTACT ghost layers
+  contactSection.addEventListener('mousemove', (e) => {
+    const rect = contactSection.getBoundingClientRect();
+    const xRatio = (e.clientX - rect.left) / rect.width - 0.5;
+    const yRatio = (e.clientY - rect.top) / rect.height - 0.5;
+
+    if (ghost1) {
+      gsap.to(ghost1, {
+        x: 16 + xRatio * 25,
+        y: -10 + yRatio * 15,
+        duration: 0.35,
+        ease: 'power2.out'
+      });
+    }
+    if (ghost2) {
+      gsap.to(ghost2, {
+        x: 32 + xRatio * 45,
+        y: -20 + yRatio * 30,
+        duration: 0.45,
+        ease: 'power2.out'
+      });
+    }
+  });
+
+  // Clickable social link magnetic hover jump
+  const contactLinks = document.querySelectorAll('.contact-big-link');
+  contactLinks.forEach((link) => {
+    link.addEventListener('mouseenter', () => {
+      gsap.to(link, { x: 14, scale: 1.03, duration: 0.25, ease: 'back.out(3)' });
+    });
+    link.addEventListener('mouseleave', () => {
+      gsap.to(link, { x: 0, scale: 1, duration: 0.3, ease: 'power2.out' });
+    });
+  });
+}
+
+/* -------------------------------------------------------------
+ * 7. Animations for Why Choose Us, Process, Team, & Consultation
+ * ----------------------------------------------------------- */
+function initNewSectionsAnimations() {
+  // Why Choose WEBNEST (Pillar Cards)
+  gsap.fromTo('.pillar-card',
+    { opacity: 0, y: 35 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#why-us',
+        start: 'top 85%',
+        once: true
+      }
+    }
+  );
+
+  // Our 5-Step Process
+  gsap.fromTo('.process-card',
+    { opacity: 0, y: 35 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.08,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#process',
+        start: 'top 85%',
+        once: true
+      }
+    }
+  );
+
+  // Meet the Team
+  gsap.fromTo('.team-card',
+    { opacity: 0, y: 35 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#team',
+        start: 'top 85%',
+        once: true
+      }
+    }
+  );
+
+}
+
+/* -------------------------------------------------------------
+ * 8. Premium motion: magnetic buttons, stack, mobile nav, spotlight
+ * ----------------------------------------------------------- */
+function initPremiumMotion() {
+  initMagnetic();
+  initStackReveal();
+  initMobileNav();
+  initAuroraFollow();
+  initSpotlightTracking();
+  initStackFilters();
+  initTerminalInteraction();
+  initViewModeToggle();
+  initDecisionMatrixAnimation();
+  initJumpingPillsInteraction();
+}
+
+function initMagnetic() {
+  const magnets = document.querySelectorAll('[data-magnetic]');
+  magnets.forEach((el) => {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      gsap.to(el, { x: x * 0.28, y: y * 0.28, duration: 0.35, ease: 'power3.out', overwrite: 'auto' });
+    });
+    el.addEventListener('mouseleave', () => {
+      gsap.to(el, { x: 0, y: 0, duration: 0.55, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
+    });
+  });
+}
+
+function initSpotlightTracking() {
+  const cards = document.querySelectorAll('.spotlight-card');
+  cards.forEach((card) => {
+    let ticking = false;
+    card.addEventListener('mousemove', (e) => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+        ticking = false;
+      });
+    }, { passive: true });
+  });
+}
+
+function initStackFilters() {
+  const filterBtns = document.querySelectorAll('.stack-filter-btn');
+  const stackCards = document.querySelectorAll('.stack-card');
+  const specRows = document.querySelectorAll('.tech-spec-table tbody tr');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      // Update active state
+      filterBtns.forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      // Filter cards
+      const matchingCards = [];
+      stackCards.forEach((card) => {
+        const category = card.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          card.style.display = 'flex';
+          matchingCards.push(card);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Filter table rows
+      const matchingRows = [];
+      specRows.forEach((row) => {
+        const category = row.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          row.style.display = '';
+          matchingRows.push(row);
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      if (typeof gsap !== 'undefined') {
+        if (matchingCards.length > 0) {
+          gsap.fromTo(matchingCards,
+            { scale: 0.88, opacity: 0, y: 22 },
+            { scale: 1, opacity: 1, y: 0, duration: 0.45, stagger: 0.04, ease: 'back.out(2)' }
+          );
+        }
+        if (matchingRows.length > 0) {
+          gsap.fromTo(matchingRows,
+            { opacity: 0, x: -10 },
+            { opacity: 1, x: 0, duration: 0.35, stagger: 0.03, ease: 'power2.out' }
+          );
+        }
+      }
+    });
+  });
+}
+
+function initViewModeToggle() {
+  const btnGrid = document.getElementById('btn-view-grid');
+  const btnTable = document.getElementById('btn-view-table');
+  const gridView = document.getElementById('stack-grid');
+  const tableView = document.getElementById('stack-table-view');
+
+  if (!btnGrid || !btnTable || !gridView || !tableView) return;
+
+  btnGrid.addEventListener('click', () => {
+    btnGrid.classList.add('is-active');
+    btnTable.classList.remove('is-active');
+    tableView.classList.remove('is-visible');
+    gridView.style.display = 'grid';
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(gridView, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+    }
+  });
+
+  btnTable.addEventListener('click', () => {
+    btnTable.classList.add('is-active');
+    btnGrid.classList.remove('is-active');
+    gridView.style.display = 'none';
+    tableView.classList.add('is-visible');
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(tableView, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+    }
+  });
+}
+
+function initDecisionMatrixAnimation() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  const rows = document.querySelectorAll('.enterprise-spec-table tbody tr');
+  if (!rows.length) return;
+
+  gsap.fromTo(rows,
+    { opacity: 0, y: 25 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.08,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#matrix',
+        start: 'top 80%',
+        once: true
+      }
+    }
+  );
+}
+
+function initJumpingPillsInteraction() {
+  const pills = document.querySelectorAll('.floating-tech-pill');
+  if (typeof gsap === 'undefined') return;
+
+  pills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      gsap.timeline()
+        .to(pill, { scale: 0.85, duration: 0.1 })
+        .to(pill, { scale: 1.25, y: -18, duration: 0.22, ease: 'back.out(3)' })
+        .to(pill, { scale: 1, y: 0, duration: 0.35, ease: 'elastic.out(1.2, 0.4)' });
+    });
+  });
+}
+
+function initTerminalInteraction() {
+  const tabs = document.querySelectorAll('.t-tab');
+  const panes = document.querySelectorAll('.code-pane');
+  const copyBtn = document.getElementById('terminal-copy-btn');
+  const copyText = document.getElementById('copy-text');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const file = tab.getAttribute('data-file');
+
+      tabs.forEach((t) => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
+
+      panes.forEach((pane) => {
+        pane.classList.remove('is-active');
+        if (pane.id === `pane-${file}`) {
+          pane.classList.add('is-active');
+        }
+      });
+    });
+  });
+
+  if (copyBtn && copyText) {
+    copyBtn.addEventListener('click', async () => {
+      const activePane = document.querySelector('.code-pane.is-active code');
+      if (activePane) {
+        try {
+          await navigator.clipboard.writeText(activePane.innerText);
+          const originalText = copyText.textContent;
+          copyText.textContent = 'Copied! ✓';
+          gsap.fromTo(copyBtn, { scale: 0.9 }, { scale: 1.05, duration: 0.2, yoyo: true, repeat: 1 });
+          setTimeout(() => {
+            copyText.textContent = originalText;
+          }, 2200);
+        } catch (err) {
+          console.warn('Clipboard write error:', err);
+        }
+      }
+    });
+  }
+}
+
+function initStackReveal() {
+  gsap.fromTo('.stack-lane',
+    { opacity: 0, y: 40, rotateX: 8 },
+    {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      duration: 0.85,
+      stagger: 0.12,
+      ease: 'back.out(1.6)',
+      scrollTrigger: { trigger: '#stack', start: 'top 80%', once: true }
+    }
+  );
+
+  gsap.fromTo('.stack-card',
+    { opacity: 0, y: 28, scale: 0.96 },
+    {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.7,
+      stagger: 0.05,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: '.stack-grid', start: 'top 85%', once: true }
+    }
+  );
+
+  gsap.fromTo('.telemetry-block',
+    { opacity: 0, y: 35, scale: 0.95 },
+    {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'back.out(1.8)',
+      scrollTrigger: { trigger: '.telemetry-hud-strip', start: 'top 85%', once: true }
+    }
+  );
+}
+
+function initMobileNav() {
+  const toggle = document.getElementById('nav-toggle');
+  const drawer = document.getElementById('mobile-drawer');
+  if (!toggle || !drawer) return;
+
+  const close = () => {
+    drawer.hidden = true;
+    document.body.style.overflow = '';
+  };
+
+  toggle.addEventListener('click', () => {
+    const open = drawer.hidden;
+    drawer.hidden = !open;
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  drawer.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', close);
+  });
+}
+
+function initAuroraFollow() {
+  const field = document.querySelector('.aurora-field');
+  if (!field) return;
+  let ticking = false;
+  window.addEventListener('pointermove', (e) => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 30;
+      const y = (e.clientY / window.innerHeight - 0.5) * 30;
+      gsap.to(field, { x, y, duration: 0.8, ease: 'power2.out', overwrite: 'auto' });
+      ticking = false;
+    });
+  }, { passive: true });
+}
