@@ -2,17 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
   <title>WEBNEST — Your Business, Online and Ready to Grow</title>
   <meta name="description" content="WEBNEST builds custom websites and Android apps that help small and growing businesses establish a professional digital presence — from a branded domain to full deployment, all handled for you.">
+  
+  <!-- Android & Mobile PWA App Capabilities -->
+  <meta name="theme-color" content="#07090e" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#07090e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WEBNest">
+  <meta name="application-name" content="WEBNest">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/images/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="/images/icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/icon-192.png">
   
   <!-- Modern Typographic Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="/css/styles.css">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'%3E%3Cpath d='M2 12c3.5-7 6.5-7 10 0s6.5 7 10 0'/%3E%3C/svg%3E">
 </head>
 <body class="lenis-ready">
   <div class="site-grain" aria-hidden="true"></div>
@@ -23,7 +36,7 @@
     <span class="aurora-orb aurora-orb-d"></span>
   </div>
 
-  <!-- Minimal Sticky Navbar -->
+  <!-- Minimal Sticky Navbar with Android & Tablet Adaptive Controls -->
   <header class="top-nav">
     <a href="#" class="nav-brand" data-cursor="link">
       <span>WEBNEST</span>
@@ -40,20 +53,83 @@
       <a href="#team" data-cursor="link">Team</a>
       <a href="#contact" class="nav-cta" data-cursor="link" data-magnetic>Book a Call</a>
     </nav>
-    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu" data-cursor="link">
-      <span></span><span></span>
-    </button>
+    <div class="nav-mobile-actions">
+      <button class="nav-install-chip" id="nav-pwa-install-btn" type="button" aria-label="Install Android App" hidden>
+        <span class="chip-dot"></span>
+        <span class="chip-text">Install App</span>
+      </button>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu" data-cursor="link">
+        <span class="toggle-bar"></span>
+        <span class="toggle-bar"></span>
+      </button>
+    </div>
   </header>
 
-  <div class="mobile-drawer" id="mobile-drawer" hidden>
-    <a href="#services">Services</a>
-    <a href="#projects">Work</a>
-    <a href="#matrix">Decision Matrix</a>
-    <a href="#stack">Tech Stack</a>
-    <a href="#about">Studio</a>
-    <a href="#process">Process</a>
-    <a href="#team">Team</a>
-    <a href="#contact">Contact</a>
+  <!-- High-End Android & Tablet Navigation Sheet Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site Navigation">
+    <div class="drawer-header">
+      <div class="drawer-brand">
+        <span>WEBNEST</span>
+        <span class="brand-subdot">●</span>
+        <span class="drawer-status-chip">120Hz ANDROID ENGINE</span>
+      </div>
+      <button class="drawer-close-btn" id="drawer-close" type="button" aria-label="Close menu">
+        <span>✕</span>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <nav class="drawer-nav">
+        <a href="#services" class="drawer-nav-item">
+          <span class="dni-title">Services</span>
+          <span class="dni-sub">Web, Native Android, Hosting</span>
+        </a>
+        <a href="#projects" class="drawer-nav-item">
+          <span class="dni-title">Work</span>
+          <span class="dni-sub">Galaxy Green Flagship &amp; Portals</span>
+        </a>
+        <a href="#matrix" class="drawer-nav-item">
+          <span class="dni-title">Decision Matrix</span>
+          <span class="dni-sub">WEBNest vs Traditional Agencies</span>
+        </a>
+        <a href="#stack" class="drawer-nav-item">
+          <span class="dni-title">Tech Stack</span>
+          <span class="dni-sub">Next.js 15 &amp; Kotlin 2.0 Native</span>
+        </a>
+        <a href="#about" class="drawer-nav-item">
+          <span class="dni-title">Studio</span>
+          <span class="dni-sub">Zero Outsourcing Philosophy</span>
+        </a>
+        <a href="#process" class="drawer-nav-item">
+          <span class="dni-title">Process</span>
+          <span class="dni-sub">Our 5-Step Delivery Sprint</span>
+        </a>
+        <a href="#team" class="drawer-nav-item">
+          <span class="dni-title">Team</span>
+          <span class="dni-sub">Direct Engineering Access</span>
+        </a>
+        <a href="#contact" class="drawer-nav-item">
+          <span class="dni-title">Contact</span>
+          <span class="dni-sub">Direct Developer Line</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="drawer-footer">
+      <button type="button" class="drawer-pwa-btn" id="drawer-pwa-install">
+        <span class="pwa-btn-icon">⚡</span>
+        <span>Install WEBNest Android App</span>
+      </button>
+      <a href="#contact" class="drawer-cta-primary">
+        <span>Book a Strategy Call</span>
+        <span>↗</span>
+      </a>
+      <div class="drawer-contact-strip">
+        <a href="mailto:hello@webnest.studio">hello@webnest.studio</a>
+        <span>•</span>
+        <a href="tel:+919876543210">+91 98765 43210</a>
+      </div>
+    </div>
   </div>
 
   <!-- =========================================================================
@@ -174,6 +250,82 @@
           <div class="dark-metric-badge">DEDICATED STUDIO</div>
           <div class="dark-metric-title">DIRECT DEVELOPER ACCESS</div>
           <div class="dark-metric-sub">One Dedicated Point of Contact • Zero Outsourcing • Real Craft</div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           SLIDING KINETIC TEXT MARQUEE (Code ✱ Create ✱ Innovate)
+           ========================================================================= -->
+      <section class="sliding-text-section" id="sliding-marquee" aria-label="Core Engineering Philosophy">
+        <div class="sliding-text-wrap">
+          <div class="sliding-text-track">
+            <!-- Stream 1 -->
+            <ul class="sliding-text-list list-unstyled">
+              <li class="sliding-text-item">
+                <span class="sliding-text-title" data-hover="Code">Code</span>
+                <span class="sliding-star-icon-wrap" aria-hidden="true">
+                  <img src="/images/star-icon.svg" alt="" class="sliding-star-img">
+                </span>
+              </li>
+              <li class="sliding-text-item">
+                <span class="sliding-text-title" data-hover="Create">Create</span>
+                <span class="sliding-star-icon-wrap" aria-hidden="true">
+                  <img src="/images/star-icon.svg" alt="" class="sliding-star-img">
+                </span>
+              </li>
+              <li class="sliding-text-item">
+                <span class="sliding-text-title" data-hover="Innovate">Innovate</span>
+                <span class="sliding-star-icon-wrap" aria-hidden="true">
+                  <img src="/images/star-icon.svg" alt="" class="sliding-star-img">
+                </span>
+              </li>
+              <li class="sliding-text-item">
+                <span class="sliding-text-title" data-hover="Deploy">Deploy</span>
+                <span class="sliding-star-icon-wrap" aria-hidden="true">
+                  <img src="/images/star-icon.svg" alt="" class="sliding-star-img">
+                </span>
+              </li>
+              <li class="sliding-text-item">
+                <span class="sliding-text-title" data-hover="Scale">Scale</span>
+                <span class="sliding-star-icon-wrap" aria-hidden="true">
+                  <img src="/images/star-icon.svg" alt="" class="sliding-star-img">
+                </span>
+              </li>
+            </ul>
+            <!-- Stream 2 (Exact Duplicate for Continuous Loop) -->
+            <ul class="sliding-text-list list-unstyled" aria-hidden="true">
+              <li class="sliding-text-item">
+                <span class="sliding-text-title" data-hover="Code">Code</span>
+                <span class="sliding-star-icon-wrap" aria-hidden="true">
+                  <img src="/images/star-icon.svg" alt="" class="sliding-star-img">
+                </span>
+              </li>
+              <li class="sliding-text-item">
+                <span class="sliding-text-title" data-hover="Create">Create</span>
+                <span class="sliding-star-icon-wrap" aria-hidden="true">
+                  <img src="/images/star-icon.svg" alt="" class="sliding-star-img">
+                </span>
+              </li>
+              <li class="sliding-text-item">
+                <span class="sliding-text-title" data-hover="Innovate">Innovate</span>
+                <span class="sliding-star-icon-wrap" aria-hidden="true">
+                  <img src="/images/star-icon.svg" alt="" class="sliding-star-img">
+                </span>
+              </li>
+              <li class="sliding-text-item">
+                <span class="sliding-text-title" data-hover="Deploy">Deploy</span>
+                <span class="sliding-star-icon-wrap" aria-hidden="true">
+                  <img src="/images/star-icon.svg" alt="" class="sliding-star-img">
+                </span>
+              </li>
+              <li class="sliding-text-item">
+                <span class="sliding-text-title" data-hover="Scale">Scale</span>
+                <span class="sliding-star-icon-wrap" aria-hidden="true">
+                  <img src="/images/star-icon.svg" alt="" class="sliding-star-img">
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -434,16 +586,27 @@
 
         </div>
 
-        <!-- Scrubber HUD -->
+        <!-- Scrubber HUD with Tablet & Android Touch Navigation -->
         <div class="slider-bottom-hud">
-          <div class="hud-progress-wrap">
-            <span id="slide-num">01 / 04</span>
-            <div class="hud-progress-bar">
-              <div class="hud-progress-fill" id="hud-fill"></div>
+          <div class="hud-controls-left">
+            <button type="button" class="hud-nav-arrow hud-prev" id="btn-project-prev" aria-label="Previous Project" data-cursor="link">
+              <span>←</span>
+            </button>
+            <div class="hud-progress-wrap">
+              <span id="slide-num">01 / 04</span>
+              <div class="hud-progress-bar">
+                <div class="hud-progress-fill" id="hud-fill"></div>
+              </div>
             </div>
+            <button type="button" class="hud-nav-arrow hud-next" id="btn-project-next" aria-label="Next Project" data-cursor="link">
+              <span>→</span>
+            </button>
+          </div>
+          <div class="touch-swipe-hint" aria-hidden="true">
+            <span>👈 Swipe or tap arrows 👉</span>
           </div>
           <a href="#contact" class="hud-all-link" data-cursor="link">
-            CONTACT FOR CONSULTATION ↗
+            DISCUSS YOUR APP OR SITE ↗
           </a>
         </div>
       </section>
@@ -463,6 +626,9 @@
             <div class="matrix-live-indicator">
               <span class="pill-glow-indicator green"></span>
               <span>LIVE CAPABILITY AUDIT &amp; SLA BENCHMARKS</span>
+            </div>
+            <div class="matrix-touch-cue" aria-hidden="true">
+              <span>← Swipe table horizontally to compare →</span>
             </div>
             <a href="#contact" class="matrix-cta-shortcut" data-cursor="link">Request Custom Architecture Brief ↗</a>
           </div>
@@ -1425,6 +1591,27 @@
       <span style="color: #666; font-size: 0.85rem;">© 2026 WEBNEST. All rights reserved.</span>
     </footer>
   </section>
+
+  <!-- Android PWA Install Floating Banner -->
+  <div class="android-install-banner" id="android-install-banner" hidden role="region" aria-label="Install Android App">
+    <div class="install-banner-inner">
+      <img src="/images/icon-192.png" alt="WEBNest Logo" class="install-banner-icon">
+      <div class="install-banner-text">
+        <div class="install-banner-title">WEBNest Android App</div>
+        <div class="install-banner-sub">Install for 120Hz smooth kinetic experience &amp; offline mode</div>
+      </div>
+      <div class="install-banner-actions">
+        <button type="button" class="btn-install-confirm" id="btn-install-confirm">Install</button>
+        <button type="button" class="btn-install-dismiss" id="btn-install-dismiss" aria-label="Dismiss install banner">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offline Status Toast Notification -->
+  <div class="offline-toast" id="offline-toast" hidden role="status" aria-live="polite">
+    <span class="offline-dot"></span>
+    <span class="offline-text">Offline Mode Active — Browsing cached WEBNest shell</span>
+  </div>
 
   <!-- External Animation Engines: GSAP, ScrollTrigger, Lenis -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

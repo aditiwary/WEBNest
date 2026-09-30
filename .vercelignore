@@ -1,0 +1,21 @@
+# Ignore Python and virtual environments
+.venv
+venv
+requirements.txt
+*.pyproject.toml
+__pycache__
+
+# Ignore raw documentation and development scripts
+WEBNEST_Website_Content.docx
+WEBNEST_Website_Copy.md
+extract_frames.swift
+server.js
+site_inspect
+.tempmediaStorage
+scratch
+
+# Ignore heavy raw video files and extracted frame dumps
+public/videos/videos/*.mov
+public/images/all_frames
+public/images/anim_detail
+public/images/new_frames

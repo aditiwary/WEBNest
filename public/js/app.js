@@ -102,7 +102,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initNewSectionsAnimations();
   initKineticContact();
   initPremiumMotion();
+  initSlidingMarquee();
+  initAndroidPwa();
 });
+
+// Helper: Android & Mobile Haptic Vibration
+function triggerHaptic(duration = 8) {
+  if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+    try {
+      navigator.vibrate(duration);
+    } catch (e) {}
+  }
+}
 
 /* -------------------------------------------------------------
  * 2. Hero Section: Word Jumping & Rubberband Pill
@@ -110,25 +121,28 @@ document.addEventListener('DOMContentLoaded', () => {
 function initJumpingHero() {
   const pill = document.getElementById('hero-pill');
 
-  // Staggered Rubberband Jump on Page Load
+  // Top Status Pill - immediate crisp entrance
+  gsap.fromTo('.hero-status-pill',
+    { y: -15, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.6, ease: 'back.out(1.7)', delay: 0.1 }
+  );
+
+  // Staggered Rubberband Jump on Page Load for headline words
   gsap.from('.jump-word', {
     y: 40,
     scale: 0.95,
     opacity: 0,
-    duration: 1.1,
+    duration: 1.0,
     stagger: 0.08,
     ease: 'back.out(2)',
     delay: 0.15
   });
 
-  gsap.from('.jump-item', {
-    y: 30,
-    opacity: 0,
-    duration: 0.9,
-    stagger: 0.1,
-    ease: 'power2.out',
-    delay: 0.45
-  });
+  // Hero Subtext, CTAs and Meta items
+  gsap.fromTo('.hero-stage .jump-item:not(.hero-status-pill)',
+    { y: 25, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.7, stagger: 0.08, ease: 'power2.out', delay: 0.25 }
+  );
 
   // Dynamic Pill Interactive Spring & Jump
   if (pill) {
@@ -200,13 +214,57 @@ function initSmoothHorizontalTrack() {
   const stage = document.getElementById('projects') || document.getElementById('horizontal-stage');
   const hudFill = document.getElementById('hud-fill');
   const slideNum = document.getElementById('slide-num');
+  const prevBtn = document.getElementById('btn-project-prev');
+  const nextBtn = document.getElementById('btn-project-next');
 
   if (!track || !stage) return;
 
-  // Mobile / tablet: allow natural horizontal scroll without locking viewport
-  if (window.innerWidth <= 900) {
+  const slides = track.querySelectorAll('.project-slide');
+  const totalSlides = slides.length || 4;
+
+  // Function to update HUD indicators on scroll
+  function updateHudOnScroll() {
+    const scrollLeft = track.scrollLeft;
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    const progress = maxScroll > 0 ? scrollLeft / maxScroll : 0;
+
+    if (hudFill) {
+      hudFill.style.width = `${Math.max(15, progress * 100)}%`;
+    }
+    if (slideNum && slides.length > 0) {
+      const slideWidth = slides[0].offsetWidth + 32;
+      const currentIndex = Math.min(totalSlides, Math.max(1, Math.round(scrollLeft / slideWidth) + 1));
+      slideNum.textContent = `0${currentIndex} / 0${totalSlides}`;
+    }
+  }
+
+  // Arrow navigation for mobile and tablet
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      triggerHaptic(10);
+      const slideWidth = slides[0] ? (slides[0].offsetWidth + 24) : 340;
+      track.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      triggerHaptic(10);
+      const slideWidth = slides[0] ? (slides[0].offsetWidth + 24) : 340;
+      track.scrollBy({ left: slideWidth, behavior: 'smooth' });
+    });
+  }
+
+  // Mobile / tablet: allow natural horizontal scroll with real-time HUD synchronization
+  const isTouchOrTablet = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024;
+  if (isTouchOrTablet) {
+    track.style.width = '100%';
+    track.style.maxWidth = '100vw';
+    track.style.display = 'flex';
+    track.style.flexWrap = 'nowrap';
     track.style.overflowX = 'auto';
     track.style.scrollSnapType = 'x mandatory';
+    track.addEventListener('scroll', updateHudOnScroll, { passive: true });
+    updateHudOnScroll();
     return;
   }
 
@@ -214,7 +272,7 @@ function initSmoothHorizontalTrack() {
     return -(track.scrollWidth - window.innerWidth + 80);
   }
 
-  // Instant responsive scrub (0.25s) with clean pin
+  // Desktop Pinning with GSAP
   gsap.to(track, {
     x: getScrollDistance,
     ease: 'none',
@@ -232,50 +290,52 @@ function initSmoothHorizontalTrack() {
           hudFill.style.width = `${Math.max(15, progress * 100)}%`;
         }
         if (slideNum) {
-          const current = Math.min(4, Math.floor(progress * 4) + 1);
-          slideNum.textContent = `0${current} / 04`;
+          const current = Math.min(totalSlides, Math.floor(progress * totalSlides) + 1);
+          slideNum.textContent = `0${current} / 0${totalSlides}`;
         }
       }
     }
   });
 
-  // Lightweight 3D tilt with RAF throttling and overwrite auto
-  const projectCards = document.querySelectorAll('.project-image-frame');
-  projectCards.forEach((card) => {
-    let ticking = false;
-    card.addEventListener('mousemove', (e) => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        gsap.to(card, {
-          rotateY: x * 0.03,
-          rotateX: -y * 0.03,
-          y: -8,
-          scale: 1.02,
-          duration: 0.3,
-          ease: 'power2.out',
-          overwrite: 'auto',
-          transformPerspective: 900
+  // Guard 3D tilt: ONLY execute on fine mouse pointers (prevent touch scroll lag)
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const projectCards = document.querySelectorAll('.project-image-frame');
+    projectCards.forEach((card) => {
+      let ticking = false;
+      card.addEventListener('mousemove', (e) => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          gsap.to(card, {
+            rotateY: x * 0.03,
+            rotateX: -y * 0.03,
+            y: -8,
+            scale: 1.02,
+            duration: 0.3,
+            ease: 'power2.out',
+            overwrite: 'auto',
+            transformPerspective: 900
+          });
+          ticking = false;
         });
-        ticking = false;
-      });
-    }, { passive: true });
+      }, { passive: true });
 
-    card.addEventListener('mouseleave', () => {
-      gsap.to(card, {
-        rotateY: 0,
-        rotateX: 0,
-        y: 0,
-        scale: 1,
-        duration: 0.35,
-        ease: 'power2.out',
-        overwrite: 'auto'
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          rotateY: 0,
+          rotateX: 0,
+          y: 0,
+          scale: 1,
+          duration: 0.35,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
       });
     });
-  });
+  }
 }
 
 /* -------------------------------------------------------------
@@ -486,6 +546,7 @@ function initPremiumMotion() {
 }
 
 function initMagnetic() {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   const magnets = document.querySelectorAll('[data-magnetic]');
   magnets.forEach((el) => {
     el.addEventListener('mousemove', (e) => {
@@ -501,6 +562,7 @@ function initMagnetic() {
 }
 
 function initSpotlightTracking() {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   const cards = document.querySelectorAll('.spotlight-card');
   cards.forEach((card) => {
     let ticking = false;
@@ -526,6 +588,7 @@ function initStackFilters() {
 
   filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
+      triggerHaptic(8);
       const filter = btn.getAttribute('data-filter');
 
       // Update active state
@@ -583,6 +646,7 @@ function initViewModeToggle() {
   if (!btnGrid || !btnTable || !gridView || !tableView) return;
 
   btnGrid.addEventListener('click', () => {
+    triggerHaptic(8);
     btnGrid.classList.add('is-active');
     btnTable.classList.remove('is-active');
     tableView.classList.remove('is-visible');
@@ -593,6 +657,7 @@ function initViewModeToggle() {
   });
 
   btnTable.addEventListener('click', () => {
+    triggerHaptic(8);
     btnTable.classList.add('is-active');
     btnGrid.classList.remove('is-active');
     gridView.style.display = 'none';
@@ -631,6 +696,7 @@ function initJumpingPillsInteraction() {
 
   pills.forEach((pill) => {
     pill.addEventListener('click', () => {
+      triggerHaptic(10);
       gsap.timeline()
         .to(pill, { scale: 0.85, duration: 0.1 })
         .to(pill, { scale: 1.25, y: -18, duration: 0.22, ease: 'back.out(3)' })
@@ -647,6 +713,7 @@ function initTerminalInteraction() {
 
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
+      triggerHaptic(8);
       const file = tab.getAttribute('data-file');
 
       tabs.forEach((t) => t.classList.remove('is-active'));
@@ -663,6 +730,7 @@ function initTerminalInteraction() {
 
   if (copyBtn && copyText) {
     copyBtn.addEventListener('click', async () => {
+      triggerHaptic(12);
       const activePane = document.querySelector('.code-pane.is-active code');
       if (activePane) {
         try {
@@ -725,21 +793,51 @@ function initStackReveal() {
 function initMobileNav() {
   const toggle = document.getElementById('nav-toggle');
   const drawer = document.getElementById('mobile-drawer');
+  const closeBtn = document.getElementById('drawer-close');
   if (!toggle || !drawer) return;
 
-  const close = () => {
+  const openDrawer = () => {
+    triggerHaptic(10);
+    drawer.hidden = false;
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeDrawer = () => {
+    triggerHaptic(6);
     drawer.hidden = true;
+    drawer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   };
 
   toggle.addEventListener('click', () => {
-    const open = drawer.hidden;
-    drawer.hidden = !open;
-    document.body.style.overflow = open ? 'hidden' : '';
+    if (drawer.hidden) {
+      openDrawer();
+    } else {
+      closeDrawer();
+    }
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeDrawer);
+  }
+
+  // Close when tapping drawer background directly
+  drawer.addEventListener('click', (e) => {
+    if (e.target === drawer) {
+      closeDrawer();
+    }
   });
 
   drawer.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', close);
+    link.addEventListener('click', closeDrawer);
+  });
+
+  // ESC key dismiss
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !drawer.hidden) {
+      closeDrawer();
+    }
   });
 }
 
@@ -758,3 +856,141 @@ function initAuroraFollow() {
     });
   }, { passive: true });
 }
+
+function initSlidingMarquee() {
+  const marquee = document.getElementById('sliding-marquee');
+  const track = marquee?.querySelector('.sliding-text-track');
+  if (!marquee || !track) return;
+
+  // Add cursor interaction attributes
+  marquee.querySelectorAll('.sliding-text-item').forEach((item) => {
+    item.setAttribute('data-cursor', 'link');
+  });
+
+  // Dynamic velocity response with Lenis scroll engine
+  if (window.lenisInstance) {
+    let resetTimer = null;
+    window.lenisInstance.on('scroll', (e) => {
+      const v = Math.abs(e.velocity || 0);
+      if (v > 0.4) {
+        const boost = Math.min(3.2, 1 + v * 0.22);
+        track.style.animationDuration = `${(32 / boost).toFixed(2)}s`;
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(() => {
+          track.style.animationDuration = '32s';
+        }, 300);
+      }
+    });
+  }
+}
+
+/* -------------------------------------------------------------
+ * 9. Android PWA Engine & Install Prompt System
+ * ----------------------------------------------------------- */
+function initAndroidPwa() {
+  // 1. Register Service Worker for offline shell and speed
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').then((reg) => {
+        console.log('WEBNest ServiceWorker active on scope:', reg.scope);
+      }).catch((err) => {
+        console.warn('WEBNest ServiceWorker registration notice:', err);
+      });
+    });
+  }
+
+  // 2. Offline / Online notification toast
+  const offlineToast = document.getElementById('offline-toast');
+  function updateOnlineStatus() {
+    if (!offlineToast) return;
+    if (!navigator.onLine) {
+      offlineToast.hidden = false;
+    } else {
+      offlineToast.hidden = true;
+    }
+  }
+  window.addEventListener('offline', updateOnlineStatus);
+  window.addEventListener('online', updateOnlineStatus);
+  updateOnlineStatus();
+
+  // 3. Android PWA Install Event Handler
+  let deferredPrompt = null;
+  const navInstallBtn = document.getElementById('nav-pwa-install-btn');
+  const drawerInstallBtn = document.getElementById('drawer-pwa-install');
+  const installBanner = document.getElementById('android-install-banner');
+  const confirmBtn = document.getElementById('btn-install-confirm');
+  const dismissBtn = document.getElementById('btn-install-dismiss');
+
+  // Check if running in standalone Android mode
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                       window.navigator.standalone ||
+                       document.referrer.includes('android-app://');
+
+  if (isStandalone) {
+    const statusChip = document.querySelector('.drawer-status-chip');
+    if (statusChip) statusChip.textContent = 'STANDALONE ANDROID APP ACTIVE';
+    if (drawerInstallBtn) drawerInstallBtn.style.display = 'none';
+    if (navInstallBtn) navInstallBtn.hidden = true;
+    return;
+  }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+
+    // Reveal install buttons in navigation and drawer
+    if (navInstallBtn) navInstallBtn.hidden = false;
+    if (drawerInstallBtn) drawerInstallBtn.style.display = 'flex';
+
+    // Show Android floating install banner after brief reading delay
+    setTimeout(() => {
+      const dismissed = sessionStorage.getItem('webnest_pwa_dismissed');
+      if (!dismissed && installBanner) {
+        installBanner.hidden = false;
+      }
+    }, 4000);
+  });
+
+  async function triggerInstallFlow() {
+    triggerHaptic(15);
+    if (!deferredPrompt) {
+      alert('To install WEBNest on your Android device:\n1. Open your browser options menu (⋮)\n2. Tap "Install App" or "Add to Home screen".');
+      return;
+    }
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      console.log('User installed WEBNest Android App!');
+      if (installBanner) installBanner.hidden = true;
+      if (navInstallBtn) navInstallBtn.hidden = true;
+      if (drawerInstallBtn) drawerInstallBtn.style.display = 'none';
+    }
+    deferredPrompt = null;
+  }
+
+  if (navInstallBtn) {
+    navInstallBtn.addEventListener('click', triggerInstallFlow);
+  }
+  if (drawerInstallBtn) {
+    drawerInstallBtn.addEventListener('click', triggerInstallFlow);
+  }
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', triggerInstallFlow);
+  }
+  if (dismissBtn && installBanner) {
+    dismissBtn.addEventListener('click', () => {
+      triggerHaptic(6);
+      installBanner.hidden = true;
+      sessionStorage.setItem('webnest_pwa_dismissed', 'true');
+    });
+  }
+
+  window.addEventListener('appinstalled', () => {
+    console.log('WEBNest PWA was installed successfully.');
+    if (installBanner) installBanner.hidden = true;
+    if (navInstallBtn) navInstallBtn.hidden = true;
+    if (drawerInstallBtn) drawerInstallBtn.style.display = 'none';
+  });
+}
+
+

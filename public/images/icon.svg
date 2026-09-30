@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#141c2e"/>
+      <stop offset="60%" stop-color="#0b0f19"/>
+      <stop offset="100%" stop-color="#05070c"/>
+    </radialGradient>
+    <linearGradient id="neonCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2ee9ff"/>
+      <stop offset="50%" stop-color="#00f2fe"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff2d95"/>
+      <stop offset="50%" stop-color="#c026d3"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
+    </linearGradient>
+    <filter id="neonGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="orbGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+  <rect width="512" height="512" rx="112" fill="none" stroke="rgba(46, 233, 255, 0.25)" stroke-width="3"/>
+
+  <!-- Futuristic Geometric Circuit Grids -->
+  <g opacity="0.12" stroke="#2ee9ff" stroke-width="2">
+    <line x1="64" y1="128" x2="448" y2="128"/>
+    <line x1="64" y1="256" x2="448" y2="256"/>
+    <line x1="64" y1="384" x2="448" y2="384"/>
+    <line x1="128" y1="64" x2="128" y2="448"/>
+    <line x1="256" y1="64" x2="256" y2="448"/>
+    <line x1="384" y1="64" x2="384" y2="448"/>
+  </g>
+
+  <!-- Decorative Corner Brackets -->
+  <path d="M 80 120 L 80 80 L 120 80" fill="none" stroke="rgba(46, 233, 255, 0.6)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 432 120 L 432 80 L 392 80" fill="none" stroke="rgba(46, 233, 255, 0.6)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 80 392 L 80 432 L 120 432" fill="none" stroke="rgba(46, 233, 255, 0.6)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 432 392 L 432 432 L 392 432" fill="none" stroke="rgba(46, 233, 255, 0.6)" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Central WEBNest Logo Monogram (Kinetic W-N Polygon) -->
+  <g filter="url(#neonGlow)">
+    <!-- Main "W" Crest with Sharp Angles -->
+    <path d="M 124 168 L 180 344 L 228 232 L 284 344 L 340 168" 
+          fill="none" 
+          stroke="url(#neonCyanGrad)" 
+          stroke-width="32" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+
+    <!-- Connected Futuristic Horizon & Pulse Dot -->
+    <path d="M 284 344 L 388 344 L 388 200" 
+          fill="none" 
+          stroke="url(#accentGrad)" 
+          stroke-width="26" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+  </g>
+
+  <!-- Pulsing Live Dot (Signature WEBNest Green/Cyan Dot) -->
+  <circle cx="388" cy="180" r="18" fill="#10b981" filter="url(#orbGlow)"/>
+  <circle cx="388" cy="180" r="10" fill="#2ee9ff"/>
+
+  <!-- WEBNest Sub-text Pill Badge -->
+  <g transform="translate(146, 396)">
+    <rect width="220" height="38" rx="19" fill="rgba(15, 23, 42, 0.9)" stroke="rgba(46, 233, 255, 0.4)" stroke-width="2"/>
+    <text x="110" y="24" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Outfit, sans-serif" font-weight="800" font-size="16" letter-spacing="4" fill="#ffffff">WEBNEST</text>
+  </g>
+</svg>

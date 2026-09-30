@@ -1,0 +1,70 @@
+{
+  "name": "WEBNest — Enterprise Web & Android Systems",
+  "short_name": "WEBNest",
+  "description": "Custom websites, high-performance web applications, and native Android apps built for small and growing businesses.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#07090e",
+  "theme_color": "#07090e",
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "categories": ["business", "developer", "productivity"],
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/images/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Our Services",
+      "short_name": "Services",
+      "description": "Full-stack websites, Android apps, and cloud hosting",
+      "url": "/index.html#services",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Flagship Work",
+      "short_name": "Work",
+      "description": "Explore Galaxy Green and live production projects",
+      "url": "/index.html#projects",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Tech Stack",
+      "short_name": "Stack",
+      "description": "Next.js 15, Kotlin Android, Cloudflare edge",
+      "url": "/index.html#stack",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Book Consultation",
+      "short_name": "Contact",
+      "description": "Direct developer access & strategy call",
+      "url": "/index.html#contact",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

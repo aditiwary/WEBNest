@@ -10,6 +10,8 @@ ENV/
 env/
 __pycache__/
 *.py[cod]
+requirements.txt
+*.pyproject.toml
 
 # Environment variables
 .env
@@ -30,6 +32,12 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Scratch frames & large raw recordings
+public/images/all_frames/
+public/images/anim_detail/
+public/images/new_frames/
+public/videos/videos/*.mov
 
 # Inspection & Temp artifacts
 site_inspect/
