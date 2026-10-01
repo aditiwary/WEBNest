@@ -1,18 +1,18 @@
-# WEBNest Studio
+# DEVYRO Studio
 
 > **Your Business, Online and Ready to Grow.**  
-> WEBNest builds custom websites and native Android apps that help small and growing businesses establish a professional digital presence — from a branded domain to full deployment, all handled for you.
+> DEVYRO builds custom websites and native Android apps that help small and growing businesses establish a professional digital presence — from a branded domain to full deployment, all handled for you.
 
 ---
 
 ## ⚡ Engineering Highlights & Features
 
 - **Kinetic Motion Engine (120 FPS):** Powered by GSAP, ScrollTrigger, and optimized Lenis scroll physics with zero layout thrashing.
-- **Executive Client Decision Matrix:** Comprehensive enterprise spec table comparing traditional outsourced agency shortcuts with WEBNest dedicated studio architecture.
+- **Executive Client Decision Matrix:** Comprehensive enterprise spec table comparing traditional outsourced agency shortcuts with DEVYRO dedicated studio architecture.
 - **Interactive Tech Arsenal Showcase:** Dual-mode architecture view (Kinetic Grid & Enterprise Spec Table) with live category filters across 12 verified technologies.
 - **Zero Outsourcing, Direct Access:** Direct point of contact with the people building your product from day one.
 - **Enterprise Edge Infrastructure:** Sub-45ms TTFB, 300+ global Cloudflare edge locations, automated SSL, and 99.99% uptime.
-- **Flagship Project:** [galaxygreen.in](https://galaxygreen.in) — Eco-luxury real estate portal engineered by WEBNest.
+- **Flagship Project:** [galaxygreen.in](https://galaxygreen.in) — Eco-luxury real estate portal engineered by DEVYRO.
 
 ---
 
@@ -30,9 +30,9 @@
 
 ## 👥 Meet the Team
 
-- **Abhinav Kumar** — *Founder & Head of Studio Strategy* (`abhinav@webnest.studio`)
-- **Atharv Mishra** — *Co-Founder & Head of Operations & Delivery* (`atharv@webnest.studio`)
-- **Aditya Raj** — *Full Stack Developer, App Developer* (`aditya@webnest.studio`)
+- **Abhinav Kumar** — *Founder & Head of Studio Strategy* (`abhinav@devyro.studio`)
+- **Atharv Mishra** — *Co-Founder & Head of Operations & Delivery* (`atharv@devyro.studio`)
+- **Aditya Raj** — *Full Stack Developer, App Developer* (`aditya@devyro.studio`)
 
 ---
 
@@ -45,8 +45,8 @@
 ### Quick Start
 ```bash
 # Clone the repository
-git clone https://github.com/aditiwary/WEBNest.git
-cd WEBNest
+git clone https://github.com/aditiwary/DEVYRO.git
+cd DEVYRO
 
 # Install dependencies
 npm install
@@ -63,14 +63,14 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 ## 📄 Documentation & Assets
 
-- [`WEBNEST_Website_Copy.md`](./WEBNEST_Website_Copy.md) — Comprehensive copy deck, architectural comparison matrix, and database integration guide.
-- [`WEBNEST_Website_Content.docx`](./WEBNEST_Website_Content.docx) — Formal client blueprint document.
+- [`DEVYRO_Website_Copy.md`](./DEVYRO_Website_Copy.md) — Comprehensive copy deck, architectural comparison matrix, and database integration guide.
+- [`DEVYRO_Website_Content.docx`](./DEVYRO_Website_Content.docx) — Formal client blueprint document.
 
 ---
 
 ## 📞 Connectivity
-- **Email:** [hello@webnest.studio](mailto:hello@webnest.studio)
+- **Email:** [hello@devyro.studio](mailto:hello@devyro.studio)
 - **Phone:** +91 98765 43210
 - **Status:** Accepting New High-Impact Client Projects
 
-© 2026 **WEBNest**. All rights reserved.
+© 2026 **DEVYRO**. All rights reserved.

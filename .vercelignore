@@ -6,8 +6,8 @@ requirements.txt
 __pycache__
 
 # Ignore raw documentation and development scripts
-WEBNEST_Website_Content.docx
-WEBNEST_Website_Copy.md
+DEVYRO_Website_Content.docx
+DEVYRO_Website_Copy.md
 extract_frames.swift
 server.js
 site_inspect

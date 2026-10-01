@@ -1,5 +1,5 @@
 // ==========================================================================
-// WEBNEST - KINETIC ANIMATION ORCHESTRATION (SMOOTH & JUMP ENGINE)
+// DEVYRO - KINETIC ANIMATION ORCHESTRATION (SMOOTH & JUMP ENGINE)
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -476,7 +476,7 @@ function initKineticContact() {
  * 7. Animations for Why Choose Us, Process, Team, & Consultation
  * ----------------------------------------------------------- */
 function initNewSectionsAnimations() {
-  // Why Choose WEBNEST (Pillar Cards)
+  // Why Choose DEVYRO (Pillar Cards)
   gsap.fromTo('.pillar-card',
     { opacity: 0, y: 35 },
     {
@@ -892,9 +892,9 @@ function initAndroidPwa() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js').then((reg) => {
-        console.log('WEBNest ServiceWorker active on scope:', reg.scope);
+        console.log('DEVYRO ServiceWorker active on scope:', reg.scope);
       }).catch((err) => {
-        console.warn('WEBNest ServiceWorker registration notice:', err);
+        console.warn('DEVYRO ServiceWorker registration notice:', err);
       });
     });
   }
@@ -944,7 +944,7 @@ function initAndroidPwa() {
 
     // Show Android floating install banner after brief reading delay
     setTimeout(() => {
-      const dismissed = sessionStorage.getItem('webnest_pwa_dismissed');
+      const dismissed = sessionStorage.getItem('devyro_pwa_dismissed');
       if (!dismissed && installBanner) {
         installBanner.hidden = false;
       }
@@ -954,13 +954,13 @@ function initAndroidPwa() {
   async function triggerInstallFlow() {
     triggerHaptic(15);
     if (!deferredPrompt) {
-      alert('To install WEBNest on your Android device:\n1. Open your browser options menu (⋮)\n2. Tap "Install App" or "Add to Home screen".');
+      alert('To install DEVYRO on your Android device:\n1. Open your browser options menu (⋮)\n2. Tap "Install App" or "Add to Home screen".');
       return;
     }
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
     if (outcome === 'accepted') {
-      console.log('User installed WEBNest Android App!');
+      console.log('User installed DEVYRO Android App!');
       if (installBanner) installBanner.hidden = true;
       if (navInstallBtn) navInstallBtn.hidden = true;
       if (drawerInstallBtn) drawerInstallBtn.style.display = 'none';
@@ -981,12 +981,12 @@ function initAndroidPwa() {
     dismissBtn.addEventListener('click', () => {
       triggerHaptic(6);
       installBanner.hidden = true;
-      sessionStorage.setItem('webnest_pwa_dismissed', 'true');
+      sessionStorage.setItem('devyro_pwa_dismissed', 'true');
     });
   }
 
   window.addEventListener('appinstalled', () => {
-    console.log('WEBNest PWA was installed successfully.');
+    console.log('DEVYRO PWA was installed successfully.');
     if (installBanner) installBanner.hidden = true;
     if (navInstallBtn) navInstallBtn.hidden = true;
     if (drawerInstallBtn) drawerInstallBtn.style.display = 'none';

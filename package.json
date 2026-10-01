@@ -1,21 +1,21 @@
 {
-  "name": "webnest",
+  "name": "devyro",
   "version": "1.0.0",
-  "description": "WEBNest - Next Generation Web Platform",
+  "description": "DEVYRO - Next Generation Web Platform",
   "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "build": "echo 'WEBNest static build ready'"
+    "build": "echo 'DEVYRO static build ready'"
   },
   "keywords": [
-    "webnest",
+    "devyro",
     "startup",
     "landing-page",
     "video-reference"
   ],
-  "author": "WEBNest Team",
+  "author": "DEVYRO Team",
   "license": "MIT",
   "devDependencies": {
     "puppeteer-core": "^25.12.0"

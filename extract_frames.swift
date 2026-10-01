@@ -3,8 +3,8 @@ import AVFoundation
 import CoreGraphics
 import ImageIO
 
-let videoPath = "/Users/rajadityaaa23/Desktop/WEBNest/public/videos/videos/website_reference.mp4"
-let outputDir = "/Users/rajadityaaa23/Desktop/WEBNest/public/images/frames"
+let videoPath = "/Users/rajadityaaa23/Desktop/DEVYRO/public/videos/videos/website_reference.mp4"
+let outputDir = "/Users/rajadityaaa23/Desktop/DEVYRO/public/images/frames"
 
 let fileManager = FileManager.default
 try? fileManager.createDirectory(atPath: outputDir, withIntermediateDirectories: true)

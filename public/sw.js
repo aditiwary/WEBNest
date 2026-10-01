@@ -1,18 +1,25 @@
 // ==========================================================================
-// WEBNest Service Worker — Offline Caching & High-Performance Android Shell
+// DEVYRO Service Worker — Offline Caching & High-Performance Android Shell
 // ==========================================================================
 
-const CACHE_NAME = 'webnest-cache-v1.0';
+const CACHE_NAME = 'devyro-cache-v2.0';
 const CORE_ASSETS = [
   '/',
   '/index.html',
   '/css/styles.css',
   '/js/app.js',
   '/manifest.json',
+  '/favicon.ico',
+  '/favicon.svg',
   '/images/icon.svg',
   '/images/icon-192.png',
   '/images/icon-512.png',
   '/images/icon-maskable.png',
+  '/images/apple-touch-icon.png',
+  '/images/favicon-96x96.png',
+  '/images/favicon-48x48.png',
+  '/images/favicon-32x32.png',
+  '/images/favicon-16x16.png',
   '/images/star-icon.svg',
   '/images/project_galaxygreen.jpg',
   '/images/service_android.jpg'
@@ -23,7 +30,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(CORE_ASSETS).catch((err) => {
-        console.warn('WEBNest ServiceWorker pre-cache non-fatal warning:', err);
+        console.warn('DEVYRO ServiceWorker pre-cache non-fatal warning:', err);
       });
     }).then(() => self.skipWaiting())
   );

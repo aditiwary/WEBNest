@@ -1,10 +1,10 @@
-# WEBNEST — Official Website Copy & Content Blueprint
+# DEVYRO — Official Website Copy & Content Blueprint
 
 ---
 
 ## 1. Hero Section
 - **Headline:** Your Business, Online and Ready to Grow
-- **Subheadline:** WEBNEST builds custom websites and Android apps that help small and growing businesses establish a professional digital presence — from a branded domain to full deployment, all handled for you.
+- **Subheadline:** DEVYRO builds custom websites and Android apps that help small and growing businesses establish a professional digital presence — from a branded domain to full deployment, all handled for you.
 - **Primary CTA:** Get a Free Consultation
 - **Secondary CTA:** Explore Our Work
 
@@ -39,7 +39,7 @@
 ---
 
 ## 4. Engineering Arsenal & Tech Stack
-WEBNEST engineers websites and mobile applications with an ultra-modern, production-grade technology foundation designed for sub-second page loads, 120 FPS kinetic motion, and cloud resilience.
+DEVYRO engineers websites and mobile applications with an ultra-modern, production-grade technology foundation designed for sub-second page loads, 120 FPS kinetic motion, and cloud resilience.
 
 ### Core Architecture Lanes
 1. **Frontend & Kinetic Motion** — Fluid micro-interactions, responsive design systems, and zero-jank physics.
@@ -75,8 +75,8 @@ Showcases real production code snippets across 4 critical disciplines:
 
 ---
 
-## 4. Executive Client Decision Matrix (Why Choose WEBNest)
-| Engineering Dimension | Traditional Agency / Freelancer | WEBNest Engineering Studio | Client Business ROI |
+## 4. Executive Client Decision Matrix (Why Choose DEVYRO)
+| Engineering Dimension | Traditional Agency / Freelancer | DEVYRO Engineering Studio | Client Business ROI |
 | :--- | :--- | :--- | :--- |
 | **Web Engine & Payload** | ✗ Bloated WordPress/Elementor (3.5MB+ payloads, 25+ plugins) | ✓ **Custom Next.js 15 & React 19 SSR** (Streaming RSC, sub-120KB atomic bundles) | **3.2x Higher Conversion** (<500ms FCP) |
 | **Native Mobile App** | ✗ Sluggish webview wrap or outsourced to unverified offshore devs | ✓ **100% Native Kotlin 2.0 & Jetpack Compose** (MVI Clean Architecture, offline-first) | **120Hz Native UX** (5★ Play Store Retention) |
@@ -88,7 +88,7 @@ Showcases real production code snippets across 4 critical disciplines:
 ---
 
 ## 5. Engineering Arsenal & Tech Stack
-WEBNEST engineers websites and mobile applications with an ultra-modern, production-grade technology foundation designed for sub-second page loads, 120 FPS kinetic motion, and cloud resilience.
+DEVYRO engineers websites and mobile applications with an ultra-modern, production-grade technology foundation designed for sub-second page loads, 120 FPS kinetic motion, and cloud resilience.
 
 ### Core Architecture Lanes
 1. **Frontend & Kinetic Motion** — Fluid micro-interactions, responsive design systems, and zero-jank physics.
@@ -118,7 +118,7 @@ WEBNEST engineers websites and mobile applications with an ultra-modern, product
 ---
 
 ## 6. About Us
-WEBNEST is a dedicated technology studio helping businesses move online with confidence. We bring website development, custom domain hosting, and Android app development together under one roof, so you're not coordinating multiple vendors for one digital presence.
+DEVYRO is a dedicated technology studio helping businesses move online with confidence. We bring website development, custom domain hosting, and Android app development together under one roof, so you're not coordinating multiple vendors for one digital presence.
 
 Because we're a small, agile team, every project gets real attention from the people actually building it — not passed between departments or outsourced.
 
@@ -136,30 +136,30 @@ Because we're a small, agile team, every project gets real attention from the pe
 ## 8. Meet the Team
 - **Abhinav Kumar — Founder & Head of Studio Strategy**
   - Directs high-level software strategy, architectural roadmaps, and client sovereignty. Transforms business operations into scalable, high-conversion digital ecosystems.
-  - **Email:** `abhinav@webnest.studio`
+  - **Email:** `abhinav@devyro.studio`
   - **LinkedIn:** `https://www.linkedin.com/`
 
 - **Atharv Mishra — Co-Founder & Head of Operations & Delivery**
   - Orchestrates end-to-end client delivery pipelines, milestone transparency, and release execution. Guarantees friction-free communication and on-schedule deployments.
-  - **Email:** `atharv@webnest.studio`
+  - **Email:** `atharv@devyro.studio`
   - **LinkedIn:** `https://www.linkedin.com/`
 
 - **Aditya Raj — Full Stack Developer, App Developer**
   - Architects and builds every client codebase from the ground up — custom Next.js 15 server-rendered frontends, native Kotlin 2.0 Android applications, and Cloudflare edge deployments.
-  - **Email:** `aditya@webnest.studio`
+  - **Email:** `aditya@devyro.studio`
   - **LinkedIn:** `https://www.linkedin.com/`
 
 ---
 
 ## 9. Direct Connectivity
-- **Email:** `hello@webnest.studio`
+- **Email:** `hello@devyro.studio`
 - **Phone:** `+91 98765 43210`
 - **Status:** Accepting New High-Impact Client Projects
 
 ---
 
 ## 10. Database Integration Architecture Guide
-To connect a database to the WEBNest stack for lead management, user authentication, or dynamic content:
+To connect a database to the DEVYRO stack for lead management, user authentication, or dynamic content:
 
 ### Option A: Supabase (Recommended — Serverless PostgreSQL)
 1. Sign up at https://supabase.com and create a project.
@@ -190,5 +190,5 @@ To connect a database to the WEBNest stack for lead management, user authenticat
 ---
 
 ## 11. Footer
-- **Tagline:** WEBNEST — Full-Stack Websites & Android Apps, Built to Grow Your Business.
-- **Copyright:** © 2026 WEBNEST. All rights reserved.
+- **Tagline:** DEVYRO — Full-Stack Websites & Android Apps, Built to Grow Your Business.
+- **Copyright:** © 2026 DEVYRO. All rights reserved.

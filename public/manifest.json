@@ -1,6 +1,6 @@
 {
-  "name": "WEBNest — Enterprise Web & Android Systems",
-  "short_name": "WEBNest",
+  "name": "DEVYRO — Enterprise Web & Android Systems",
+  "short_name": "DEVYRO",
   "description": "Custom websites, high-performance web applications, and native Android apps built for small and growing businesses.",
   "start_url": "/index.html",
   "scope": "/",
@@ -30,6 +30,23 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/images/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     },
     {
       "src": "/images/icon.svg",

@@ -111,11 +111,11 @@ const server = http.createServer((req, res) => {
       return res.end(`
         <!DOCTYPE html>
         <html lang="en">
-        <head><title>404 Not Found - WEBNest</title><style>body{background:#0b0f19;color:#e2e8f0;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;flex-direction:column;}</style></head>
+        <head><title>404 Not Found - DEVYRO</title><style>body{background:#0b0f19;color:#e2e8f0;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;flex-direction:column;}</style></head>
         <body>
           <h1>404 - Asset Not Found</h1>
           <p>The file <code>${pathname}</code> was not found in <code>/public</code>.</p>
-          <a href="/" style="color:#00f2fe;">Return to WEBNest Homepage</a>
+          <a href="/" style="color:#00f2fe;">Return to DEVYRO Homepage</a>
         </body>
         </html>
       `);
@@ -154,7 +154,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`=========================================`);
-  console.log(`🚀 WEBNEST Local Server Running!`);
+  console.log(`🚀 DEVYRO Local Server Running!`);
   console.log(`🔗 Local: http://localhost:${PORT}`);
   console.log(`📁 Serving directory: ${PUBLIC_DIR}`);
   console.log(`📹 Video reference folder: ${path.join(PUBLIC_DIR, 'videos')}`);

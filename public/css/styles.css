@@ -1,5 +1,5 @@
 /* ==========================================================================
-   WEBNEST - ULTRA HIGH FIDELITY KINETIC REPLICA (JUMP & SMOOTH PERFORMANCE)
+   DEVYRO - ULTRA HIGH FIDELITY KINETIC REPLICA (JUMP & SMOOTH PERFORMANCE)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap');
@@ -142,6 +142,22 @@ a, button, [role="button"], input[type="submit"], input[type="button"], .btn-her
 
 .nav-brand:hover {
   transform: scale(1.06) rotate(-1deg);
+}
+
+.brand-logo-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  object-fit: contain;
+  box-shadow: 0 0 10px rgba(46, 233, 255, 0.35);
+  transition: transform 0.3s var(--ease-jump), box-shadow 0.3s var(--ease-out);
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.nav-brand:hover .brand-logo-img {
+  transform: scale(1.12) rotate(4deg);
+  box-shadow: 0 0 16px rgba(46, 233, 255, 0.65);
 }
 
 .brand-subdot {
@@ -1871,7 +1887,7 @@ a, button, [role="button"], input[type="submit"], input[type="button"], .btn-her
   transform: translateX(3px);
 }
 
-/* 1. Why Choose WEBNEST (Pillars) */
+/* 1. Why Choose DEVYRO (Pillars) */
 .pillars-stage-section {
   background: #090a0d;
   color: #fff;
@@ -3699,7 +3715,7 @@ html, body {
   white-space: nowrap;
 }
 
-.enterprise-spec-table thead th.col-webnest {
+.enterprise-spec-table thead th.col-devyro {
   color: #ffffff;
   background: rgba(99, 102, 241, 0.15);
   border-left: 1px solid rgba(99, 102, 241, 0.25);
@@ -3763,7 +3779,7 @@ html, body {
   font-weight: 800;
 }
 
-.cell-webnest-premium {
+.cell-devyro-premium {
   background: rgba(99, 102, 241, 0.08);
   border-left: 1px solid rgba(99, 102, 241, 0.2);
   border-right: 1px solid rgba(99, 102, 241, 0.2);
@@ -3965,7 +3981,7 @@ html, body {
 
 /* ==========================================================================
    SLIDING KINETIC TEXT MARQUEE (Code ✱ Create ✱ Innovate)
-   Reference: HacXLerate / WEBNest Kinetic Architecture
+   Reference: HacXLerate / DEVYRO Kinetic Architecture
    ========================================================================== */
 .sliding-text-section {
   position: relative;

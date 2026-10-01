@@ -3,22 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
-  <title>WEBNEST — Your Business, Online and Ready to Grow</title>
-  <meta name="description" content="WEBNEST builds custom websites and Android apps that help small and growing businesses establish a professional digital presence — from a branded domain to full deployment, all handled for you.">
+  <title>DEVYRO — Your Business, Online and Ready to Grow</title>
+  <meta name="description" content="DEVYRO builds custom websites and Android apps that help small and growing businesses establish a professional digital presence — from a branded domain to full deployment, all handled for you.">
   
-  <!-- Android & Mobile PWA App Capabilities -->
+  <!-- Standard Favicons & Google Search Bar Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  <!-- Apple Touch & PWA Mobile App Capabilities -->
   <meta name="theme-color" content="#07090e" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#07090e">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="WEBNest">
-  <meta name="application-name" content="WEBNest">
+  <meta name="apple-mobile-web-app-title" content="DEVYRO">
+  <meta name="application-name" content="DEVYRO">
   <meta name="format-detection" content="telephone=no">
   <link rel="manifest" href="/manifest.json">
-  <link rel="apple-touch-icon" href="/images/icon-192.png">
-  <link rel="icon" type="image/svg+xml" href="/images/icon.svg">
-  <link rel="icon" type="image/png" sizes="192x192" href="/images/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/images/icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/images/icon-512.png">
+
+  <!-- Open Graph & Google Search Social Previews -->
+  <meta property="og:site_name" content="DEVYRO">
+  <meta property="og:title" content="DEVYRO — Enterprise Web & Android Systems">
+  <meta property="og:description" content="DEVYRO builds custom websites and Android apps that help small and growing businesses establish a professional digital presence — from a branded domain to full deployment.">
+  <meta property="og:image" content="/images/icon-512.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DEVYRO — Enterprise Web & Android Systems">
+  <meta name="twitter:description" content="Custom websites, high-performance web applications, and native Android apps built for small and growing businesses.">
+  <meta name="twitter:image" content="/images/icon-512.png">
+
+  <!-- Google Search Structured Data (Schema.org Organization Logo for Search Results) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "DEVYRO",
+    "legalName": "DEVYRO Studio",
+    "url": "https://devyro.studio",
+    "logo": "https://devyro.studio/images/icon-512.png",
+    "image": "https://devyro.studio/images/icon-512.png",
+    "description": "Bespoke digital engineering studio creating custom Next.js web systems and native Android applications.",
+    "email": "hello@devyro.studio",
+    "telephone": "+919876543210"
+  }
+  </script>
   
   <!-- Modern Typographic Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +78,8 @@
   <!-- Minimal Sticky Navbar with Android & Tablet Adaptive Controls -->
   <header class="top-nav">
     <a href="#" class="nav-brand" data-cursor="link">
-      <span>WEBNEST</span>
+      <img src="/favicon.svg" alt="DEVYRO Logo" class="brand-logo-img">
+      <span>DEVYRO</span>
       <span class="brand-subdot">●</span>
     </a>
     <div class="nav-center-tag">ENTERPRISE WEB &amp; ANDROID SYSTEMS // BUILT TO SCALE</div>
@@ -69,7 +109,8 @@
   <div class="mobile-drawer" id="mobile-drawer" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site Navigation">
     <div class="drawer-header">
       <div class="drawer-brand">
-        <span>WEBNEST</span>
+        <img src="/favicon.svg" alt="DEVYRO Logo" class="brand-logo-img">
+        <span>DEVYRO</span>
         <span class="brand-subdot">●</span>
         <span class="drawer-status-chip">120Hz ANDROID ENGINE</span>
       </div>
@@ -90,7 +131,7 @@
         </a>
         <a href="#matrix" class="drawer-nav-item">
           <span class="dni-title">Decision Matrix</span>
-          <span class="dni-sub">WEBNest vs Traditional Agencies</span>
+          <span class="dni-sub">DEVYRO vs Traditional Agencies</span>
         </a>
         <a href="#stack" class="drawer-nav-item">
           <span class="dni-title">Tech Stack</span>
@@ -118,14 +159,14 @@
     <div class="drawer-footer">
       <button type="button" class="drawer-pwa-btn" id="drawer-pwa-install">
         <span class="pwa-btn-icon">⚡</span>
-        <span>Install WEBNest Android App</span>
+        <span>Install DEVYRO Android App</span>
       </button>
       <a href="#contact" class="drawer-cta-primary">
         <span>Book a Strategy Call</span>
         <span>↗</span>
       </a>
       <div class="drawer-contact-strip">
-        <a href="mailto:hello@webnest.studio">hello@webnest.studio</a>
+        <a href="mailto:hello@devyro.studio">hello@devyro.studio</a>
         <span>•</span>
         <a href="tel:+919876543210">+91 98765 43210</a>
       </div>
@@ -158,7 +199,7 @@
     <!-- High-Impact Studio Status Pill -->
     <div class="hero-status-pill jump-item" data-magnetic>
       <span class="status-pulse-dot"></span>
-      <span class="status-text">WEBNEST SOFTWARE SYSTEMS // BESPOKE DIGITAL ENGINEERING</span>
+      <span class="status-text">DEVYRO SOFTWARE SYSTEMS // BESPOKE DIGITAL ENGINEERING</span>
       <span class="status-badge-chip">● ACCEPTING NEW CLIENTS</span>
     </div>
 
@@ -199,7 +240,7 @@
     </h1>
 
     <p class="hero-subtext-bottom jump-item">
-      WEBNEST engineers high-performance Next.js web applications, native Kotlin Android platforms, and enterprise cloud infrastructure with zero outsourcing. From branded domains to sub-second Core Web Vitals, all handled for you.
+      DEVYRO engineers high-performance Next.js web applications, native Kotlin Android platforms, and enterprise cloud infrastructure with zero outsourcing. From branded domains to sub-second Core Web Vitals, all handled for you.
     </p>
 
     <!-- Dual Hero Call to Action -->
@@ -454,7 +495,7 @@
               </div>
             </div>
             <div class="project-image-frame" data-cursor="view">
-              <img src="/images/project_galaxygreen.jpg" alt="Galaxy Green Portal - Built by WEBNest">
+              <img src="/images/project_galaxygreen.jpg" alt="Galaxy Green Portal - Built by DEVYRO">
               <div class="image-hover-glow"></div>
             </div>
             <div class="project-meta-col">
@@ -482,7 +523,7 @@
                 <span>Next.js</span><span>Cloudflare CDN</span><span>Custom DNS</span><span>Auto-TLS</span><span>ROI Engine</span>
               </div>
               <p class="project-summary">
-                Official digital portal for Galaxy Green (Amausi, Lucknow Airport corridor), engineered by WEBNest with high-speed cloud hosting, freehold plot inventory showcase, and verified clear title documents.
+                Official digital portal for Galaxy Green (Amausi, Lucknow Airport corridor), engineered by DEVYRO with high-speed cloud hosting, freehold plot inventory showcase, and verified clear title documents.
               </p>
               <div class="project-actions-row">
                 <a href="https://galaxygreen.in" target="_blank" rel="noopener" class="btn-case-study shine-btn" data-cursor="link" data-magnetic>
@@ -617,8 +658,8 @@
       <section class="matrix-stage-section" id="matrix" data-cursor-theme="dark">
         <div class="section-header-dark">
           <span class="section-tag-dark">✦ EXECUTIVE CLIENT DECISION MATRIX</span>
-          <h2 class="section-title-dark">WHY INDUSTRY LEADERS CHOOSE WEBNEST</h2>
-          <p class="section-sub-dark">A transparent architectural breakdown comparing conventional agency shortcuts against WEBNest's high-performance engineering standards. See why clients choose our studio over freelancers and traditional firms.</p>
+          <h2 class="section-title-dark">WHY INDUSTRY LEADERS CHOOSE DEVYRO</h2>
+          <p class="section-sub-dark">A transparent architectural breakdown comparing conventional agency shortcuts against DEVYRO's high-performance engineering standards. See why clients choose our studio over freelancers and traditional firms.</p>
         </div>
 
         <div class="matrix-table-container spotlight-card">
@@ -638,7 +679,7 @@
               <tr>
                 <th class="col-spec">ENGINEERING DIMENSION</th>
                 <th class="col-traditional">TYPICAL FREELANCER / AGENCY</th>
-                <th class="col-webnest">WEBNEST ENGINEERING STUDIO</th>
+                <th class="col-devyro">DEVYRO ENGINEERING STUDIO</th>
                 <th class="col-roi">CLIENT BUSINESS IMPACT</th>
               </tr>
             </thead>
@@ -651,7 +692,7 @@
                 <td class="cell-traditional">
                   <span class="status-badge-neg">✗</span> Bloated WordPress, Elementor, or Wix. 3.5MB+ JavaScript payloads, 25+ unmaintained third-party plugins.
                 </td>
-                <td class="cell-webnest-premium">
+                <td class="cell-devyro-premium">
                   <span class="status-badge-pos">✓</span> <strong>Custom Next.js 15 &amp; React 19 SSR.</strong> Streaming React Server Components, sub-120KB atomic bundles, zero-hydration client islands.
                 </td>
                 <td class="cell-roi">
@@ -668,7 +709,7 @@
                 <td class="cell-traditional">
                   <span class="status-badge-neg">✗</span> Sluggish hybrid webview wrap or outsourced to unverified offshore contractors prone to Play Store rejections.
                 </td>
-                <td class="cell-webnest-premium">
+                <td class="cell-devyro-premium">
                   <span class="status-badge-pos">✓</span> <strong>100% Native Kotlin 2.0 &amp; Jetpack Compose.</strong> Coroutines, StateFlow, MVI Clean Architecture, 120Hz gesture physics, offline-first SQL.
                 </td>
                 <td class="cell-roi">
@@ -685,7 +726,7 @@
                 <td class="cell-traditional">
                   <span class="status-badge-neg">✗</span> Cheap shared cPanel hosting. Manual SSL renewals, vulnerable to DDoS attacks, crashes on traffic spikes.
                 </td>
-                <td class="cell-webnest-premium">
+                <td class="cell-devyro-premium">
                   <span class="status-badge-pos">✓</span> <strong>Cloudflare Enterprise Anycast Mesh.</strong> Automated TLS 1.3, DDoS shield, 300+ city edge cache, zero-downtime deployment pipelines.
                 </td>
                 <td class="cell-roi">
@@ -702,7 +743,7 @@
                 <td class="cell-traditional">
                   <span class="status-badge-neg">✗</span> Jittery CSS transitions, layout thrashing, generic stock templates that look and feel amateurish.
                 </td>
-                <td class="cell-webnest-premium">
+                <td class="cell-devyro-premium">
                   <span class="status-badge-pos">✓</span> <strong>120 FPS GSAP &amp; Lenis Physics.</strong> Spotlight cursor tracking, zero-jitter momentum interpolation, dynamic spring micro-animations.
                 </td>
                 <td class="cell-roi">
@@ -719,7 +760,7 @@
                 <td class="cell-traditional">
                   <span class="status-badge-neg">✗</span> Basic Yoast plugin. 45–65 Lighthouse score, failing Google Core Web Vitals and penalized in mobile search rankings.
                 </td>
-                <td class="cell-webnest-premium">
+                <td class="cell-devyro-premium">
                   <span class="status-badge-pos">✓</span> <strong>100/100 Core Web Vitals SLA.</strong> Automated OpenGraph social previews, semantic Schema.org JSON-LD, instant page 1 indexation.
                 </td>
                 <td class="cell-roi">
@@ -736,7 +777,7 @@
                 <td class="cell-traditional">
                   <span class="status-badge-neg">✗</span> Layer of account managers and junior interns. Proprietary lock-in, recurring licensing traps, no code access.
                 </td>
-                <td class="cell-webnest-premium">
+                <td class="cell-devyro-premium">
                   <span class="status-badge-pos">✓</span> <strong>Direct Access to Founders &amp; Lead Architect.</strong> 100% clean Git repository handed directly to you. Zero vendor lock-in.
                 </td>
                 <td class="cell-roi">
@@ -764,7 +805,7 @@
            ========================================================================= -->
       <section class="about-stage-section" id="about" data-cursor-theme="dark">
         <div class="about-narrative">
-          <strong>WEBNEST</strong> is a small, dedicated technology studio helping businesses move online with confidence. We bring website development, custom domain hosting, and Android app development together under one roof, so you're not coordinating multiple vendors for one digital presence.
+          <strong>DEVYRO</strong> is a small, dedicated technology studio helping businesses move online with confidence. We bring website development, custom domain hosting, and Android app development together under one roof, so you're not coordinating multiple vendors for one digital presence.
         </div>
         <div class="about-media-box" data-cursor="view">
           <img src="/images/about_portrait.jpg" alt="Dedicated Studio Developer at Workspace">
@@ -782,12 +823,12 @@
       </section>
 
       <!-- =========================================================================
-           7. WHY CHOOSE WEBNEST (Key Pillars)
+           7. WHY CHOOSE DEVYRO (Key Pillars)
            ========================================================================= -->
       <section class="pillars-stage-section" id="why-us" data-cursor-theme="dark">
         <div class="section-header-dark">
-          <span class="section-tag-dark">THE WEBNEST ADVANTAGE</span>
-          <h2 class="section-title-dark">WHY CHOOSE WEBNEST</h2>
+          <span class="section-tag-dark">THE DEVYRO ADVANTAGE</span>
+          <h2 class="section-title-dark">WHY CHOOSE DEVYRO</h2>
           <p class="section-sub-dark">Built with growth in mind, delivering personal care that large agencies can't match.</p>
         </div>
 
@@ -899,7 +940,7 @@
               <span>Studio Strategy</span><span>Product Vision</span><span>Client Architecture</span>
             </div>
             <div class="team-contacts">
-              <a href="mailto:abhinav@webnest.studio" class="team-contact-btn" data-cursor="link" title="Email Abhinav Kumar">
+              <a href="mailto:abhinav@devyro.studio" class="team-contact-btn" data-cursor="link" title="Email Abhinav Kumar">
                 <span class="contact-btn-icon">✉</span> Email
               </a>
               <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="team-contact-btn linkedin-btn" data-cursor="link" title="LinkedIn Profile">
@@ -918,7 +959,7 @@
               <span>Delivery Ops</span><span>Client Success</span><span>Milestone QA</span>
             </div>
             <div class="team-contacts">
-              <a href="mailto:atharv@webnest.studio" class="team-contact-btn" data-cursor="link" title="Email Atharv Mishra">
+              <a href="mailto:atharv@devyro.studio" class="team-contact-btn" data-cursor="link" title="Email Atharv Mishra">
                 <span class="contact-btn-icon">✉</span> Email
               </a>
               <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="team-contact-btn linkedin-btn" data-cursor="link" title="LinkedIn Profile">
@@ -937,7 +978,7 @@
               <span>Full-Stack Systems</span><span>Kotlin 2.0 Android</span><span>Next.js 15</span><span>Cloudflare Edge</span>
             </div>
             <div class="team-contacts">
-              <a href="mailto:aditya@webnest.studio" class="team-contact-btn" data-cursor="link" title="Email Aditya Raj">
+              <a href="mailto:aditya@devyro.studio" class="team-contact-btn" data-cursor="link" title="Email Aditya Raj">
                 <span class="contact-btn-icon">✉</span> Email
               </a>
               <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="team-contact-btn linkedin-btn" data-cursor="link" title="LinkedIn Profile">
@@ -955,7 +996,7 @@
         <div class="section-header-dark">
           <span class="section-tag-dark">✦ ENGINEERING EXCELLENCE &amp; SKILLS</span>
           <h2 class="section-title-dark">THE TECH ARSENAL WE SHIP WITH</h2>
-          <p class="section-sub-dark">No bloated site builders. No fragile templates. WEBNest engineers bespoke high-performance websites, native Android applications, and enterprise cloud infrastructure built for speed, scalability, and conversion.</p>
+          <p class="section-sub-dark">No bloated site builders. No fragile templates. DEVYRO engineers bespoke high-performance websites, native Android applications, and enterprise cloud infrastructure built for speed, scalability, and conversion.</p>
         </div>
 
         <!-- Interactive Category Filter Bar -->
@@ -1291,7 +1332,7 @@
         </div>
 
         <!-- =========================================================================
-             LIVE INTERACTIVE CODE LAB (WEBNest IDE Terminal)
+             LIVE INTERACTIVE CODE LAB (DEVYRO IDE Terminal)
              ========================================================================= -->
         <div class="tech-terminal-wrap" data-cursor-theme="dark">
           <div class="tech-terminal-card spotlight-card">
@@ -1327,12 +1368,12 @@
             <div class="terminal-body">
               <!-- Tab 1: MotionPhysics.ts -->
               <div class="code-pane is-active" id="pane-motion">
-                <pre><code class="lang-typescript"><span class="c-comment">// WEBNest Kinetic Motion Engine: Synchronizing Lenis 120fps physics with GSAP ScrollTrigger</span>
+                <pre><code class="lang-typescript"><span class="c-comment">// DEVYRO Kinetic Motion Engine: Synchronizing Lenis 120fps physics with GSAP ScrollTrigger</span>
 <span class="c-keyword">import</span> Lenis <span class="c-keyword">from</span> <span class="c-string">'@studio-freight/lenis'</span>;
 <span class="c-keyword">import</span> { gsap } <span class="c-keyword">from</span> <span class="c-string">'gsap'</span>;
 <span class="c-keyword">import</span> { ScrollTrigger } <span class="c-keyword">from</span> <span class="c-string">'gsap/ScrollTrigger'</span>;
 
-<span class="c-keyword">export class</span> <span class="c-class">WEBNestMotionEngine</span> {
+<span class="c-keyword">export class</span> <span class="c-class">DevyroMotionEngine</span> {
   <span class="c-keyword">private</span> lenis: Lenis;
 
   <span class="c-keyword">constructor</span>() {
@@ -1362,19 +1403,19 @@
 
               <!-- Tab 2: AndroidCompose.kt -->
               <div class="code-pane" id="pane-android">
-                <pre><code class="lang-kotlin"><span class="c-comment">// WEBNest Native Android: Reactive Coroutine Stream with Jetpack Compose</span>
-<span class="c-keyword">package</span> studio.webnest.android.ui
+                <pre><code class="lang-kotlin"><span class="c-comment">// DEVYRO Native Android: Reactive Coroutine Stream with Jetpack Compose</span>
+<span class="c-keyword">package</span> studio.devyro.android.ui
 
 <span class="c-keyword">import</span> androidx.compose.runtime.*
 <span class="c-keyword">import</span> androidx.compose.animation.*
 <span class="c-keyword">import</span> kotlinx.coroutines.flow.StateFlow
 
 <span class="c-keyword">@Composable</span>
-<span class="c-keyword">fun</span> <span class="c-function">WebNestAppScreen</span>(viewModel: <span class="c-class">StudioViewModel</span> = hiltViewModel()) {
+<span class="c-keyword">fun</span> <span class="c-function">DevyroAppScreen</span>(viewModel: <span class="c-class">StudioViewModel</span> = hiltViewModel()) {
     <span class="c-keyword">val</span> uiState <span class="c-keyword">by</span> viewModel.uiState.collectAsStateWithLifecycle()
 
     <span class="c-function">Scaffold</span>(
-        topBar = { <span class="c-function">AnimatedTopBar</span>(title = <span class="c-string">"WEBNest Studio"</span>) }
+        topBar = { <span class="c-function">AnimatedTopBar</span>(title = <span class="c-string">"DEVYRO Studio"</span>) }
     ) { paddingValues -&gt;
         <span class="c-function">Crossfade</span>(
             targetState = uiState.connectionStatus,
@@ -1391,8 +1432,8 @@
 
               <!-- Tab 3: EdgeDeploy.yml -->
               <div class="code-pane" id="pane-cloud">
-                <pre><code class="lang-yaml"><span class="c-comment"># WEBNest Automated Zero-Downtime Edge Deployment Pipeline</span>
-<span class="c-keyword">name</span>: <span class="c-string">WEBNest Global Edge Rollout</span>
+                <pre><code class="lang-yaml"><span class="c-comment"># DEVYRO Automated Zero-Downtime Edge Deployment Pipeline</span>
+<span class="c-keyword">name</span>: <span class="c-string">DEVYRO Global Edge Rollout</span>
 <span class="c-keyword">on</span>:
   <span class="c-keyword">push</span>:
     <span class="c-keyword">branches</span>: [ <span class="c-string">main</span> ]
@@ -1414,13 +1455,13 @@
         <span class="c-keyword">run</span>: npx wrangler deploy --env production
 
       - <span class="c-keyword">name</span>: Verify Sub-50ms Edge Response
-        <span class="c-keyword">run</span>: curl -sI https://webnest.studio | grep <span class="c-string">"HTTP/2 200"</span></code></pre>
+        <span class="c-keyword">run</span>: curl -sI https://devyro.studio | grep <span class="c-string">"HTTP/2 200"</span></code></pre>
               </div>
 
               <!-- Tab 4: LighthouseAudit.json -->
               <div class="code-pane" id="pane-audit">
                 <pre><code class="lang-json">{
-  <span class="c-string">"site"</span>: <span class="c-string">"https://webnest.studio"</span>,
+  <span class="c-string">"site"</span>: <span class="c-string">"https://devyro.studio"</span>,
   <span class="c-string">"performanceProfile"</span>: <span class="c-string">"Enterprise Production"</span>,
   <span class="c-string">"scores"</span>: {
     <span class="c-string">"performance"</span>: <span class="c-number">100</span>,
@@ -1542,7 +1583,7 @@
     <div class="contact-bento-grid">
       <!-- Col 1: Clickable Direct Links -->
       <div class="contact-links-col">
-        <a href="mailto:hello@webnest.studio" class="contact-big-link" data-cursor="link">Email <span>↗</span></a>
+        <a href="mailto:hello@devyro.studio" class="contact-big-link" data-cursor="link">Email <span>↗</span></a>
         <a href="tel:+919876543210" class="contact-big-link" data-cursor="link">Phone <span>↗</span></a>
         <a href="https://wa.me/" target="_blank" class="contact-big-link" data-cursor="link">WhatsApp <span>↗</span></a>
       </div>
@@ -1554,7 +1595,7 @@
           <p style="font-size: 1rem; line-height: 1.6; color: #444; margin-bottom: 1.25rem;">
             Tell us what you're looking for — a website, an app, or both — and we'll help you find the right fit.
           </p>
-          <a href="mailto:hello@webnest.studio" class="btn-hero-primary" data-cursor="link" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.6rem; font-size: 0.95rem; border-radius: 9999px;">
+          <a href="mailto:hello@devyro.studio" class="btn-hero-primary" data-cursor="link" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.6rem; font-size: 0.95rem; border-radius: 9999px;">
             <span>Contact Us</span>
             <span>↗</span>
           </a>
@@ -1577,7 +1618,7 @@
 
     <!-- Direct Studio Connectivity Bar -->
     <div class="direct-contact-bar" style="margin-top: 3.5rem; justify-content: center; background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border-radius: 999px; padding: 1.1rem 2.2rem; border: 1px solid rgba(148,163,184,0.22); box-shadow: 0 10px 30px rgba(0,0,0,0.05); flex-wrap: wrap;">
-      <a href="mailto:hello@webnest.studio" class="direct-contact-item" data-cursor="link">✉ hello@webnest.studio</a>
+      <a href="mailto:hello@devyro.studio" class="direct-contact-item" data-cursor="link">✉ hello@devyro.studio</a>
       <a href="tel:+919876543210" class="direct-contact-item" data-cursor="link">☎ +91 98765 43210</a>
       <span class="direct-contact-item" style="color: #10b981;">● Studio Accepting High-Impact Projects</span>
     </div>
@@ -1585,19 +1626,19 @@
     <!-- Bottom Legal / Footer -->
     <footer class="contact-bottom-legal">
       <div style="display: flex; flex-direction: column; gap: 0.4rem; text-align: left;">
-        <span style="font-weight: 700; color: #111; font-size: 0.95rem;">WEBNEST — Full-Stack Websites & Android Apps, Built to Grow Your Business.</span>
-        <span style="color: #666; font-size: 0.85rem;">Contact: <a href="mailto:hello@webnest.studio" style="color: #111; text-decoration: underline;" data-cursor="link">hello@webnest.studio</a> &nbsp;|&nbsp; <a href="tel:+919876543210" style="color: #111; text-decoration: underline;" data-cursor="link">+91 98765 43210</a></span>
+        <span style="font-weight: 700; color: #111; font-size: 0.95rem;">DEVYRO — Full-Stack Websites & Android Apps, Built to Grow Your Business.</span>
+        <span style="color: #666; font-size: 0.85rem;">Contact: <a href="mailto:hello@devyro.studio" style="color: #111; text-decoration: underline;" data-cursor="link">hello@devyro.studio</a> &nbsp;|&nbsp; <a href="tel:+919876543210" style="color: #111; text-decoration: underline;" data-cursor="link">+91 98765 43210</a></span>
       </div>
-      <span style="color: #666; font-size: 0.85rem;">© 2026 WEBNEST. All rights reserved.</span>
+      <span style="color: #666; font-size: 0.85rem;">© 2026 DEVYRO. All rights reserved.</span>
     </footer>
   </section>
 
   <!-- Android PWA Install Floating Banner -->
   <div class="android-install-banner" id="android-install-banner" hidden role="region" aria-label="Install Android App">
     <div class="install-banner-inner">
-      <img src="/images/icon-192.png" alt="WEBNest Logo" class="install-banner-icon">
+      <img src="/images/icon-192.png" alt="DEVYRO Logo" class="install-banner-icon">
       <div class="install-banner-text">
-        <div class="install-banner-title">WEBNest Android App</div>
+        <div class="install-banner-title">DEVYRO Android App</div>
         <div class="install-banner-sub">Install for 120Hz smooth kinetic experience &amp; offline mode</div>
       </div>
       <div class="install-banner-actions">
@@ -1610,7 +1651,7 @@
   <!-- Offline Status Toast Notification -->
   <div class="offline-toast" id="offline-toast" hidden role="status" aria-live="polite">
     <span class="offline-dot"></span>
-    <span class="offline-text">Offline Mode Active — Browsing cached WEBNest shell</span>
+    <span class="offline-text">Offline Mode Active — Browsing cached DEVYRO shell</span>
   </div>
 
   <!-- External Animation Engines: GSAP, ScrollTrigger, Lenis -->
